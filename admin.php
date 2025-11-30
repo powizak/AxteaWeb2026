@@ -8,6 +8,7 @@ $uploadDir = 'uploads/';       // Složka pro nahrávání souborů
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $pass);
+
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Chyba připojení k DB. Zkontrolujte údaje v souboru admin.php");
@@ -19,9 +20,19 @@ if (isset($_GET['logout'])) {
     header("Location: admin.php");
     exit;
 }
-
 $error = '';
 $success = '';
+
+// --- ZMĚNA HESLA PRO KURZY ---
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_password']) && isset($_SESSION['user_id'])) {
+    $newPass = trim($_POST['course_password']);
+    if (!empty($newPass)) {
+        // Uložíme/Aktualizujeme heslo v DB
+        $stmt = $pdo->prepare("INSERT INTO app_config (key_name, value) VALUES ('course_password', ?) ON DUPLICATE KEY UPDATE value = ?");
+        $stmt->execute([$newPass, $newPass]);
+        $success = "Heslo pro kurzy bylo změněno.";
+    }
+}
 
 // --- LOGIN ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
@@ -80,10 +91,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_item']) && isset(
         if (empty($link)) {
             $error = "Musíte zadat odkaz nebo nahrát soubor.";
         } else {
-            $sql = "INSERT INTO practical_info (category, title, description, link, icon, sort_order, is_active) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            // Získání a očištění kategorie
+            $category = isset($_POST['category']) ? trim($_POST['category']) : '';
+            
+            // Debugging: Pokud je kategorie prázdná, zalogujeme to (pro jistotu)
+            if ($category === '') {
+                file_put_contents('debug_category_error.txt', date('Y-m-d H:i:s') . " - Empty category. POST: " . print_r($_POST, true) . "\n", FILE_APPEND);
+            }
+
+            // Fallback pro prázdnou kategorii
+            if ($category === '') {
+                $category = ($_POST['section'] === 'courses') ? 'dalsi' : 'aktualne';
+            }
+
+            $sql = "INSERT INTO practical_info (section, category, title, description, link, icon, sort_order, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([
-                $_POST['category'],
+                $_POST['section'],
+                $category,
                 $_POST['title'],
                 $_POST['description'],
                 $link,
@@ -210,12 +235,26 @@ exit;
 
             <!-- Důležité: enctype pro nahrávání souborů -->
             <form method="post" enctype="multipart/form-data">
+                
+                <!-- Výběr Sekce -->
+                <div class="mb-4 bg-gray-50 p-3 rounded border">
+                    <label class="block text-sm font-bold text-gray-700 mb-2">Sekce webu</label>
+                    <div class="flex gap-4">
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="section" value="public" checked onchange="updateCategories('public')" class="text-blue-600 focus:ring-blue-500">
+                            <span class="ml-2 text-sm">Veřejné info</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="section" value="courses" onchange="updateCategories('courses')" class="text-purple-600 focus:ring-purple-500">
+                            <span class="ml-2 text-sm">Kurzy (Heslo)</span>
+                        </label>
+                    </div>
+                </div>
+
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700">Kategorie</label>
-                    <select name="category" class="w-full border p-2 rounded mt-1">
-                        <option value="aktualne">Aktuálně</option>
-                        <option value="odkazy">Odkazy</option>
-                        <option value="uzitecne">Užitečné</option>
+                    <select name="category" id="categorySelect" class="w-full border p-2 rounded mt-1">
+                        <!-- Naplněno JS -->
                     </select>
                 </div>
                 <div class="mb-4">
@@ -295,6 +334,23 @@ exit;
                     <i class="fas fa-plus mr-2"></i> Uložit na web
                 </button>
             </form>
+
+            <!-- Nastavení hesla pro kurzy -->
+            <div class="mt-8 pt-8 border-t">
+                <h3 class="text-md font-bold mb-3 text-gray-700">Nastavení kurzů</h3>
+                <form method="post" class="bg-gray-50 p-4 rounded border">
+                    <label class="block text-sm text-gray-600 mb-1">Heslo pro účastníky</label>
+                    <div class="flex gap-2">
+                        <?php
+                            // Načtení aktuálního hesla
+                            $stmt = $pdo->query("SELECT value FROM app_config WHERE key_name = 'course_password'");
+                            $currentPass = $stmt->fetchColumn() ?: '';
+                        ?>
+                        <input type="text" name="course_password" value="<?= htmlspecialchars($currentPass) ?>" class="w-full border p-2 rounded text-sm">
+                        <button type="submit" name="update_password" class="bg-blue-600 text-white px-3 rounded hover:bg-blue-700 text-sm">Uložit</button>
+                    </div>
+                </form>
+            </div>
         </div>
 
         <!-- Seznam -->
@@ -307,6 +363,7 @@ exit;
                             <tr>
                                 <th class="p-3">Pořadí</th>
                                 <th class="p-3">Aktivní</th>
+                                <th class="p-3">Sekce</th>
                                 <th class="p-3">Kategorie</th>
                                 <th class="p-3">Obsah</th>
                                 <th class="p-3">Cíl odkazu</th>
@@ -315,7 +372,7 @@ exit;
                         </thead>
                         <tbody class="divide-y divide-gray-200">
                             <?php
-                            $items = $pdo->query("SELECT * FROM practical_info ORDER BY category, sort_order ASC, id DESC")->fetchAll();
+                            $items = $pdo->query("SELECT * FROM practical_info ORDER BY section DESC, category, sort_order ASC, id DESC")->fetchAll();
                             foreach($items as $item):
                                 $isUpload = strpos($item['link'], $uploadDir) === 0;
                             ?>
@@ -327,9 +384,19 @@ exit;
                                     <input type="checkbox" name="items[<?= $item['id'] ?>][is_active]" value="1" <?= $item['is_active'] ? 'checked' : '' ?> class="w-5 h-5 text-blue-600 rounded cursor-pointer">
                                 </td>
                                 <td class="p-3">
+                                    <span class="px-2 py-1 rounded text-xs font-bold uppercase tracking-wide
+                                        <?= $item['section'] == 'public' ? 'bg-gray-200 text-gray-700' : 'bg-purple-200 text-purple-800' ?>">
+                                        <?= $item['section'] == 'public' ? 'Veřejné' : 'Kurzy' ?>
+                                    </span>
+                                </td>
+                                <td class="p-3">
                                     <span class="px-2 py-1 rounded text-xs font-bold 
                                         <?= $item['category'] == 'aktualne' ? 'bg-blue-100 text-blue-800' : 
-                                           ($item['category'] == 'odkazy' ? 'bg-green-100 text-green-800' : 'bg-purple-100 text-purple-800') ?>">
+                                           ($item['category'] == 'odkazy' ? 'bg-green-100 text-green-800' : 
+                                           ($item['category'] == 'uzitecne' ? 'bg-yellow-100 text-yellow-800' : 
+                                           ($item['category'] == 'materialy' ? 'bg-purple-100 text-purple-800' :
+                                           ($item['category'] == 'prezentace' ? 'bg-pink-100 text-pink-800' :
+                                           ($item['category'] == 'dalsi' ? 'bg-gray-100 text-gray-800' : 'bg-indigo-100 text-indigo-800'))))) ?>">
                                         <?= $item['category'] ?>
                                     </span>
                                 </td>
@@ -371,6 +438,39 @@ exit;
     </div>
 
     <script>
+        // Dynamické kategorie podle sekce
+        const categories = {
+            'public': [
+                {val: 'aktualne', text: 'Aktuálně'},
+                {val: 'odkazy', text: 'Odkazy'},
+                {val: 'uzitecne', text: 'Užitečné'}
+            ],
+            'courses': [
+                {val: 'materialy', text: 'Materiály'},
+                {val: 'prezentace', text: 'Prezentace'},
+                {val: 'dalsi', text: 'Další'}
+            ]
+        };
+
+        function updateCategories(section) {
+            const select = document.getElementById('categorySelect');
+            select.innerHTML = '';
+            categories[section].forEach(cat => {
+                const opt = document.createElement('option');
+                opt.setAttribute('value', cat.val); // Explicitně nastavit value
+                opt.innerText = cat.text;
+                select.appendChild(opt);
+            });
+            // Vybrat první možnost
+            if (select.options.length > 0) {
+                select.selectedIndex = 0;
+            }
+        }
+
+        // Init based on current state (handles browser cache/reload)
+        const currentSection = document.querySelector('input[name="section"]:checked').value;
+        updateCategories(currentSection);
+
         // Jednoduchý script pro změnu ikony a náhledu
         function setIcon(iconName) {
             document.getElementById('iconInput').value = iconName;

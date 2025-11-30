@@ -1,39 +1,50 @@
-# Implementation Plan - Practical Info Updates
+# Implementation Plan - Course Materials Section
 
-The goal is to add ordering and visibility control to the "Praktické informace" section.
+The goal is to add a password-protected section for course participants with its own subcategories.
 
 ## User Review Required
 > [!IMPORTANT]
-> You will need to run the `update_db.sql` script on your database to add the new columns (`sort_order`, `is_active`).
+> You will need to run the `update_db_courses.sql` script to add the configuration table and update the `practical_info` table structure.
 
 ## Proposed Changes
 
 ### Database
-#### [NEW] [update_db.sql](file:///c:/Users/admin/OneDrive/Dokumenty/Visual%20Studio%20Code/AxteaWeb26_Gemini3Asi/update_db.sql)
-- SQL script to add `sort_order` (INT) and `is_active` (BOOLEAN/TINYINT) columns to `practical_info` table.
+#### [NEW] [update_db_courses.sql](file:///c:/Users/admin/OneDrive/Dokumenty/Visual%20Studio%20Code/AxteaWeb26_Gemini3Asi/update_db_courses.sql)
+- Create table `app_config` to store the shared password.
+- Add `section` column to `practical_info` (ENUM: 'public', 'courses') to distinguish between main site info and course info.
+- `category` column will now serve as subcategory for both sections.
+    - Public: 'aktualne', 'odkazy', 'uzitecne'
+    - Courses: 'materialy', 'prezentace', 'dalsi' (or similar customizable 3 columns)
+- Insert default password.
 
 ### Backend
 #### [MODIFY] [admin.php](file:///c:/Users/admin/OneDrive/Dokumenty/Visual%20Studio%20Code/AxteaWeb26_Gemini3Asi/admin.php)
-- Update "Add Item" form to include:
-    - `sort_order` input (number, default 0).
-    - `is_active` checkbox (checked by default).
-- Update "List" table to:
-    - Show `sort_order` (editable).
-    - Show `is_active` status (checkbox).
-    - Add logic to update these values (e.g., a "Save Changes" button for the table).
+- **Add Item Form**:
+    - Add "Sekce" (Section) radio buttons: "Veřejné info" vs "Kurzy".
+    - Dynamic "Kategorie" dropdown based on selected section.
+        - If Public: Aktuálně, Odkazy, Užitečné.
+        - If Courses: Materiály, Prezentace, Další (names to be defined).
+- **List View**:
+    - Filter or tab view to separate "Veřejné" and "Kurzy" for better organization.
+- **Settings**: Password management.
 
 #### [MODIFY] [api.php](file:///c:/Users/admin/OneDrive/Dokumenty/Visual%20Studio%20Code/AxteaWeb26_Gemini3Asi/api.php)
-- Update SQL query to:
-    - Select only where `is_active = 1`.
-    - Order by `sort_order ASC`.
+- **Public Request**: Fetch only `section = 'public'` AND `is_active = 1`.
+- **Password Request**:
+    - Verify password.
+    - If correct, fetch `section = 'courses'` AND `is_active = 1`.
+    - Group by `category` (3 columns).
 
 ### Frontend
 #### [MODIFY] [index.php](file:///c:/Users/admin/OneDrive/Dokumenty/Visual%20Studio%20Code/AxteaWeb26_Gemini3Asi/index.php)
-- No major changes needed in `index.php` as it consumes the API, but I should verify if any frontend logic needs adjustment.
+- **Course Section**:
+    - Password input.
+    - On success, render 3 columns similar to the public section but with course data.
 
 ## Verification Plan
 ### Manual Verification
-- Run `update_db.sql` (User action).
-- Go to `admin.php`, add a new item with specific order and active status.
-- Check `index.php` (or `api.php` output) to see if the item appears in the correct order.
-- Deactivate an item in `admin.php` and verify it disappears from `index.php`.
+- Run SQL update.
+- Admin: Add items to both sections.
+- Admin: Change course password.
+- Frontend: Verify public info loads without password.
+- Frontend: Verify course info requires password and displays correct columns.

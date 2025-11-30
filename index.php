@@ -361,7 +361,65 @@
                          <!-- Data načtena přes JS -->
                     </ul>
                 </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Sekce pro účastníky kurzů -->
+    <section class="py-16 bg-gray-50" id="kurzy">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-serif font-bold text-primary mb-4">Materiály pro účastníky kurzů</h2>
+                <p class="text-gray-600 mb-8">Tato sekce je přístupná pouze s heslem, které jste obdrželi na kurzu.</p>
+                
+                <!-- Login Form -->
+                <div id="course-login" class="max-w-md mx-auto">
+                    <div class="flex gap-2">
+                        <input type="password" id="course-password" placeholder="Zadejte heslo..." class="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary focus:border-transparent outline-none">
+                        <button onclick="loadCourseMaterials()" class="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-primary-dark transition duration-300">
+                            Zobrazit
+                        </button>
+                    </div>
+                    <p id="course-error" class="text-red-500 text-sm mt-2 hidden">Nesprávné heslo.</p>
+                </div>
+            </div>
+
+            <!-- Hidden Content -->
+            <div id="course-content" class="hidden">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Materiály -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 h-full flex flex-col">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center text-purple-600 mr-4">
+                                <i class="fas fa-book-open text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">Studijní materiály</h3>
+                        </div>
+                        <ul class="space-y-4 flex-grow" id="list-materialy"></ul>
+                    </div>
+
+                    <!-- Prezentace -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 h-full flex flex-col">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center text-purple-600 mr-4">
+                                <i class="fas fa-desktop text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">Prezentace</h3>
+                        </div>
+                        <ul class="space-y-4 flex-grow" id="list-prezentace"></ul>
+                    </div>
+
+                    <!-- Další -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 h-full flex flex-col">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center text-purple-600 mr-4">
+                                <i class="fas fa-folder-open text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">Další soubory</h3>
+                        </div>
+                        <ul class="space-y-4 flex-grow" id="list-dalsi"></ul>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -603,6 +661,63 @@
         document.addEventListener('DOMContentLoaded', function() {
             CookieConsent.init();
         });
+
+        // 6. LOGIKA PRO KURZY (Heslo)
+        function loadCourseMaterials() {
+            const password = document.getElementById('course-password').value;
+            const errorMsg = document.getElementById('course-error');
+            const loginDiv = document.getElementById('course-login');
+            const contentDiv = document.getElementById('course-content');
+
+            // Odeslání hesla na API
+            fetch('api.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'password=' + encodeURIComponent(password)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Heslo je správné -> Skrýt login, zobrazit obsah
+                    loginDiv.classList.add('hidden');
+                    contentDiv.classList.remove('hidden');
+                    errorMsg.classList.add('hidden');
+
+                    // Funkce pro vykreslení položek
+                    const renderList = (items, elementId) => {
+                        const list = document.getElementById(elementId);
+                        if (!items || items.length === 0) {
+                            list.innerHTML = '<li class="text-gray-400 italic text-sm">Žádné soubory.</li>';
+                            return;
+                        }
+                        list.innerHTML = items.map(item => `
+                            <li>
+                                <a href="${item.link}" target="_blank" class="flex items-center p-3 rounded hover:bg-gray-50 transition group border border-transparent hover:border-gray-200">
+                                    <i class="fas fa-${item.icon || 'file'} text-gray-400 group-hover:text-primary mr-3 transition"></i>
+                                    <div>
+                                        <span class="block text-gray-700 font-medium group-hover:text-primary transition">${item.title}</span>
+                                        ${item.description ? `<span class="text-xs text-gray-500">${item.description}</span>` : ''}
+                                    </div>
+                                </a>
+                            </li>
+                        `).join('');
+                    };
+
+                    renderList(data.materialy, 'list-materialy');
+                    renderList(data.prezentace, 'list-prezentace');
+                    renderList(data.dalsi, 'list-dalsi');
+
+                } else {
+                    // Chyba
+                    errorMsg.classList.remove('hidden');
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                errorMsg.textContent = "Chyba spojení.";
+                errorMsg.classList.remove('hidden');
+            });
+        }
 
         // 5. PARTICLE NETWORK ANIMATION (Hvězdkupa)
         (function() {
