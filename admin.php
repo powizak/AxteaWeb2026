@@ -80,19 +80,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_item']) && isset(
         if (empty($link)) {
             $error = "Musíte zadat odkaz nebo nahrát soubor.";
         } else {
-            $sql = "INSERT INTO practical_info (category, title, description, link, icon) VALUES (?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO practical_info (category, title, description, link, icon, sort_order, is_active) VALUES (?, ?, ?, ?, ?, ?, ?)";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([
                 $_POST['category'],
                 $_POST['title'],
                 $_POST['description'],
                 $link,
-                $_POST['icon']
+                $_POST['icon'],
+                (int)$_POST['sort_order'],
+                isset($_POST['is_active']) ? 1 : 0
             ]);
             header("Location: admin.php?success=1");
             exit;
         }
     }
+}
+
+// --- HROMADNÁ ÚPRAVA (POŘADÍ A AKTIVITA) ---
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_items']) && isset($_SESSION['user_id'])) {
+    if (isset($_POST['items']) && is_array($_POST['items'])) {
+        $sql = "UPDATE practical_info SET sort_order = ?, is_active = ? WHERE id = ?";
+        $stmt = $pdo->prepare($sql);
+        
+        foreach ($_POST['items'] as $id => $data) {
+            $sortOrder = intval($data['sort_order']);
+            $isActive = isset($data['is_active']) ? 1 : 0;
+            $stmt->execute([$sortOrder, $isActive, $id]);
+        }
+        $success = "Změny byly uloženy.";
+        // Refresh pro zobrazení změn
+        header("Location: admin.php?success_update=1");
+        exit;
+    }
+}
+
+if (isset($_GET['success_update'])) {
+    $success = "Změny byly úspěšně uloženy.";
 }
 
 // --- SMAZÁNÍ POLOŽKY ---
@@ -202,6 +226,19 @@ exit;
                     <label class="block text-sm font-medium text-gray-700">Popis (volitelné)</label>
                     <input type="text" name="description" class="w-full border p-2 rounded mt-1">
                 </div>
+                
+                <div class="flex gap-4 mb-4">
+                    <div class="w-1/2">
+                        <label class="block text-sm font-medium text-gray-700">Pořadí</label>
+                        <input type="number" name="sort_order" class="w-full border p-2 rounded mt-1" value="0">
+                    </div>
+                    <div class="w-1/2 flex items-center mt-6">
+                        <label class="flex items-center cursor-pointer select-none">
+                            <input type="checkbox" name="is_active" class="w-5 h-5 text-blue-600 rounded focus:ring-blue-500" checked>
+                            <span class="ml-2 text-sm text-gray-700">Aktivní</span>
+                        </label>
+                    </div>
+                </div>
 
                 <!-- Sekce pro soubor nebo odkaz -->
                 <div class="mb-4 p-4 bg-gray-50 rounded border border-gray-200">
@@ -263,57 +300,72 @@ exit;
         <!-- Seznam -->
         <div class="lg:col-span-2 bg-white p-6 rounded shadow">
             <h2 class="text-lg font-bold mb-4">Obsah webu</h2>
-            <div class="overflow-x-auto">
-                <table class="min-w-full text-sm text-left">
-                    <thead class="bg-gray-100 text-gray-600 uppercase text-xs">
-                        <tr>
-                            <th class="p-3">Kategorie</th>
-                            <th class="p-3">Obsah</th>
-                            <th class="p-3">Cíl odkazu</th>
-                            <th class="p-3 text-right">Akce</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-200">
-                        <?php
-                        $items = $pdo->query("SELECT * FROM practical_info ORDER BY category, id DESC")->fetchAll();
-                        foreach($items as $item):
-                            $isUpload = strpos($item['link'], $uploadDir) === 0;
-                        ?>
-                        <tr class="hover:bg-gray-50 transition">
-                            <td class="p-3">
-                                <span class="px-2 py-1 rounded text-xs font-bold 
-                                    <?= $item['category'] == 'aktualne' ? 'bg-blue-100 text-blue-800' : 
-                                       ($item['category'] == 'odkazy' ? 'bg-green-100 text-green-800' : 'bg-purple-100 text-purple-800') ?>">
-                                    <?= $item['category'] ?>
-                                </span>
-                            </td>
-                            <td class="p-3">
-                                <div class="flex items-center">
-                                    <div class="w-8 text-center text-gray-400 mr-3">
-                                        <i class="fas fa-<?= htmlspecialchars($item['icon']) ?> text-lg"></i>
+            <form method="post">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full text-sm text-left">
+                        <thead class="bg-gray-100 text-gray-600 uppercase text-xs">
+                            <tr>
+                                <th class="p-3">Pořadí</th>
+                                <th class="p-3">Aktivní</th>
+                                <th class="p-3">Kategorie</th>
+                                <th class="p-3">Obsah</th>
+                                <th class="p-3">Cíl odkazu</th>
+                                <th class="p-3 text-right">Akce</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <?php
+                            $items = $pdo->query("SELECT * FROM practical_info ORDER BY category, sort_order ASC, id DESC")->fetchAll();
+                            foreach($items as $item):
+                                $isUpload = strpos($item['link'], $uploadDir) === 0;
+                            ?>
+                            <tr class="hover:bg-gray-50 transition">
+                                <td class="p-3 w-20">
+                                    <input type="number" name="items[<?= $item['id'] ?>][sort_order]" value="<?= $item['sort_order'] ?>" class="w-16 border p-1 rounded text-center">
+                                </td>
+                                <td class="p-3 w-16 text-center">
+                                    <input type="checkbox" name="items[<?= $item['id'] ?>][is_active]" value="1" <?= $item['is_active'] ? 'checked' : '' ?> class="w-5 h-5 text-blue-600 rounded cursor-pointer">
+                                </td>
+                                <td class="p-3">
+                                    <span class="px-2 py-1 rounded text-xs font-bold 
+                                        <?= $item['category'] == 'aktualne' ? 'bg-blue-100 text-blue-800' : 
+                                           ($item['category'] == 'odkazy' ? 'bg-green-100 text-green-800' : 'bg-purple-100 text-purple-800') ?>">
+                                        <?= $item['category'] ?>
+                                    </span>
+                                </td>
+                                <td class="p-3">
+                                    <div class="flex items-center">
+                                        <div class="w-8 text-center text-gray-400 mr-3">
+                                            <i class="fas fa-<?= htmlspecialchars($item['icon']) ?> text-lg"></i>
+                                        </div>
+                                        <div>
+                                            <div class="font-semibold text-gray-900"><?= htmlspecialchars($item['title']) ?></div>
+                                            <div class="text-xs text-gray-500"><?= htmlspecialchars($item['description']) ?></div>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <div class="font-semibold text-gray-900"><?= htmlspecialchars($item['title']) ?></div>
-                                        <div class="text-xs text-gray-500"><?= htmlspecialchars($item['description']) ?></div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="p-3 text-xs font-mono text-gray-500 max-w-xs truncate">
-                                <?php if($isUpload): ?>
-                                    <span class="text-orange-600 font-bold"><i class="fas fa-file-upload mr-1"></i> SOUBOR</span><br>
-                                <?php endif; ?>
-                                <a href="<?= htmlspecialchars($item['link']) ?>" target="_blank" class="hover:underline"><?= htmlspecialchars($item['link']) ?></a>
-                            </td>
-                            <td class="p-3 text-right">
-                                <a href="?delete=<?= $item['id'] ?>" class="text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 p-2 rounded transition" onclick="return confirm('Opravdu smazat tuto položku? Pokud jde o nahraný soubor, bude smazán i z disku.')">
-                                    <i class="fas fa-trash-alt"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
+                                </td>
+                                <td class="p-3 text-xs font-mono text-gray-500 max-w-xs truncate">
+                                    <?php if($isUpload): ?>
+                                        <span class="text-orange-600 font-bold"><i class="fas fa-file-upload mr-1"></i> SOUBOR</span><br>
+                                    <?php endif; ?>
+                                    <a href="<?= htmlspecialchars($item['link']) ?>" target="_blank" class="hover:underline"><?= htmlspecialchars($item['link']) ?></a>
+                                </td>
+                                <td class="p-3 text-right">
+                                    <a href="?delete=<?= $item['id'] ?>" class="text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 p-2 rounded transition" onclick="return confirm('Opravdu smazat tuto položku? Pokud jde o nahraný soubor, bude smazán i z disku.')">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-4 text-right">
+                    <button type="submit" name="update_items" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 font-bold shadow transition">
+                        <i class="fas fa-save mr-2"></i> Uložit změny
+                    </button>
+                </div>
+            </form>
         </div>
 
     </div>

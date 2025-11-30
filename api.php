@@ -21,7 +21,7 @@ try {
 
 // Získání dat
 try {
-    $stmt = $pdo->query("SELECT * FROM practical_info ORDER BY sort_order ASC, id DESC");
+    $stmt = $pdo->query("SELECT * FROM practical_info WHERE is_active = 1 ORDER BY sort_order ASC, id DESC");
     $data = $stmt->fetchAll();
     
     // Rozdělení do kategorií
