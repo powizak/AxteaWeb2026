@@ -475,7 +475,7 @@
             const loader = document.getElementById('practical-loader');
             const content = document.getElementById('practical-content');
             
-            fetch('api.php')
+            fetch('api.php?t=' + new Date().getTime())
                 .then(response => response.json())
                 .then(data => {
                     if(data.error) {
