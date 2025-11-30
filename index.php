@@ -327,10 +327,10 @@
                 <i class="fas fa-spinner fa-spin text-3xl text-blue-500"></i>
             </div>
 
-            <div id="practical-content" class="grid grid-cols-1 md:grid-cols-3 gap-10 hidden">
+            <div id="practical-content" class="flex flex-col md:flex-row gap-10 hidden">
                 
                 <!-- Sloupec 1: Aktuálně -->
-                <div id="col-aktualne">
+                <div id="col-aktualne" class="flex-1">
                     <h3 class="text-xl font-bold text-white mb-6 flex items-center">
                         <span class="bg-blue-600 w-8 h-8 rounded-full flex items-center justify-center text-sm mr-3"><i class="fas fa-bullhorn"></i></span>
                         Aktuálně
@@ -341,7 +341,7 @@
                 </div>
 
                 <!-- Sloupec 2: Odkazy -->
-                <div id="col-odkazy">
+                <div id="col-odkazy" class="flex-1">
                     <h3 class="text-xl font-bold text-white mb-6 flex items-center">
                         <span class="bg-green-600 w-8 h-8 rounded-full flex items-center justify-center text-sm mr-3"><i class="fas fa-link"></i></span>
                         Odkazy
@@ -352,7 +352,7 @@
                 </div>
 
                 <!-- Sloupec 3: Užitečné -->
-                <div id="col-uzitecne">
+                <div id="col-uzitecne" class="flex-1">
                     <h3 class="text-xl font-bold text-white mb-6 flex items-center">
                         <span class="bg-purple-600 w-8 h-8 rounded-full flex items-center justify-center text-sm mr-3"><i class="fas fa-info"></i></span>
                         Užitečné
