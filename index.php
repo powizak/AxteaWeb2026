@@ -106,7 +106,7 @@
             <div class="flex justify-between items-center h-20">
                 <div class="flex-shrink-0 flex items-center">
                     <!-- LOGO s jemným pozadím pro čitelnost -->
-                    <a href="#" class="bg-white/90 px-2 py-1 rounded transition hover:bg-white">
+                    <a href="#" class="px-2 py-1 rounded transition hover:bg-white">
                         <img src="/img/logo.svg" alt="AXTEA" class="h-10 md:h-12 w-auto">
                     </a>
                 </div>
