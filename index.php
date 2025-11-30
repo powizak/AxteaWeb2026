@@ -60,11 +60,23 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
         .hero-bg {
-            background-image: linear-gradient(rgba(0, 75, 156, 0.85), rgba(0, 50, 100, 0.9)), url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background: radial-gradient(circle at center, #004b9c 0%, #002855 100%);
+            position: relative;
+            overflow: hidden;
         }
+         #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Nejnižší vrstva v rámci sekce */
+        }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
         .fade-in-up {
             animation: fadeInUp 0.8s ease-out forwards;
             opacity: 0;
@@ -129,18 +141,19 @@
 
     <!-- Hero Sekce -->
     <section class="hero-bg h-screen flex items-center justify-center relative">
-        <div class="text-center px-4 max-w-4xl mx-auto">
-            <h1 class="text-4xl md:text-6xl font-serif font-bold text-white mb-6 fade-in-up">
+         <!-- Canvas pro animaci -->
+        <canvas id="hero-canvas"></canvas>
+
+        <!-- Obsah (Text) -->
+        <div class="text-center px-4 max-w-4xl mx-auto hero-content">
+            <h1 class="text-4xl md:text-6xl font-serif font-bold text-white mb-8 fade-in-up drop-shadow-md">
                 Počítáme s vámi
             </h1>
-            <p class="text-xl text-blue-100 mb-10 font-light fade-in-up delay-100">
-                Tradice, odbornost a rodinný přístup v daňovém poradenství a účetnictví již od roku 1992.
-            </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4 fade-in-up delay-200">
                 <a href="#sluzby" class="bg-white text-primary px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition shadow-lg">
                     Naše služby
                 </a>
-                <a href="#kontakt" class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-primary transition">
+                <a href="#kontakt" class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-primary transition backdrop-blur-sm">
                     Sjednat schůzku
                 </a>
             </div>
@@ -584,7 +597,95 @@
             CookieConsent.init();
         });
 
-        
+        // 5. PARTICLE NETWORK ANIMATION (Hvězdkupa)
+        (function() {
+            const canvas = document.getElementById('hero-canvas');
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let particles = [];
+
+            // Konfigurace
+            const particleCount = window.innerWidth < 768 ? 40 : 90; // Méně bodů na mobilu
+            const connectionDistance = 150;
+            const mouseDistance = 200;
+
+            // Inicializace velikosti
+            function resize() {
+                width = canvas.width = canvas.parentElement.offsetWidth;
+                height = canvas.height = canvas.parentElement.offsetHeight;
+            }
+            window.addEventListener('resize', () => {
+                resize();
+                initParticles(); // Reset při změně velikosti
+            });
+            resize();
+
+            // Třída pro částici
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.vx = (Math.random() - 0.5) * 0.5; // Rychlost X
+                    this.vy = (Math.random() - 0.5) * 0.5; // Rychlost Y
+                    this.size = Math.random() * 2 + 1;
+                }
+
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+
+                    // Odraz od stěn
+                    if (this.x < 0 || this.x > width) this.vx *= -1;
+                    if (this.y < 0 || this.y > height) this.vy *= -1;
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+                    ctx.fill();
+                }
+            }
+
+            function initParticles() {
+                particles = [];
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new Particle());
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                
+                // Aktualizace a vykreslení bodů
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update();
+                    particles[i].draw();
+
+                    // Vykreslení čar (spojení)
+                    for (let j = i; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < connectionDistance) {
+                            ctx.beginPath();
+                            // Opacity podle vzdálenosti (čím blíže, tím viditelnější)
+                            const opacity = 1 - (distance / connectionDistance);
+                            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.2})`; 
+                            ctx.lineWidth = 1;
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(animate);
+            }
+
+            initParticles();
+            animate();
+        })();
     </script>
 </body>
 </html>
