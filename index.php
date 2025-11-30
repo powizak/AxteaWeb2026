@@ -295,7 +295,7 @@
                             <i class="fas fa-envelope mt-1 w-6 text-blue-300"></i>
                             <div>
                                 <p class="font-semibold">E-mail</p>
-                                <a href="mailto:pavelkova@axtea.cz" class="text-blue-100 text-sm hover:text-white">pavelkova@axtea.cz</a>
+                                <a href="mailto:renatapavelek@axtea.cz" class="text-blue-100 text-sm hover:text-white">renatapavelek@axtea.cz</a>
                             </div>
                         </div>
                         
