@@ -260,7 +260,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-16">
                 <h2 class="text-3xl font-serif font-bold text-primary mb-4">Kontaktujte nás</h2>
-                <p class="text-gray-600">Sjednejte si schůzku předem, abychom se vám mohli plně věnovat.</p>
+                <p class="text-gray-600">Vždy je nutné si sjednat schůzku předem – díky tomu jsme lépe připraveni řešit váš požadavek a jednání je rychlejší a efektivnější. Po dohodě se vám rádi budeme věnovat i v méně obvyklém čase.</p>
             </div>
 
             <div class="flex flex-col lg:flex-row gap-8">
