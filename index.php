@@ -330,7 +330,7 @@
             <div id="practical-content" class="grid grid-cols-1 md:grid-cols-3 gap-10 hidden">
                 
                 <!-- Sloupec 1: Aktuálně -->
-                <div>
+                <div id="col-aktualne">
                     <h3 class="text-xl font-bold text-white mb-6 flex items-center">
                         <span class="bg-blue-600 w-8 h-8 rounded-full flex items-center justify-center text-sm mr-3"><i class="fas fa-bullhorn"></i></span>
                         Aktuálně
@@ -341,7 +341,7 @@
                 </div>
 
                 <!-- Sloupec 2: Odkazy -->
-                <div>
+                <div id="col-odkazy">
                     <h3 class="text-xl font-bold text-white mb-6 flex items-center">
                         <span class="bg-green-600 w-8 h-8 rounded-full flex items-center justify-center text-sm mr-3"><i class="fas fa-link"></i></span>
                         Odkazy
@@ -352,7 +352,7 @@
                 </div>
 
                 <!-- Sloupec 3: Užitečné -->
-                <div>
+                <div id="col-uzitecne">
                     <h3 class="text-xl font-bold text-white mb-6 flex items-center">
                         <span class="bg-purple-600 w-8 h-8 rounded-full flex items-center justify-center text-sm mr-3"><i class="fas fa-info"></i></span>
                         Užitečné
@@ -497,15 +497,22 @@
                         </li>
                     `;
 
-                    if (data.aktualne) {
-                        document.getElementById('list-aktualne').innerHTML = data.aktualne.map(renderItem).join('');
-                    }
-                    if (data.odkazy) {
-                        document.getElementById('list-odkazy').innerHTML = data.odkazy.map(renderItem).join('');
-                    }
-                    if (data.uzitecne) {
-                        document.getElementById('list-uzitecne').innerHTML = data.uzitecne.map(renderItem).join('');
-                    }
+                    // Funkce pro obsluhu zobrazení/skrytí sloupce
+                    const handleColumn = (dataArray, listId, colId) => {
+                        const col = document.getElementById(colId);
+                        const list = document.getElementById(listId);
+                        
+                        if (dataArray && dataArray.length > 0) {
+                            list.innerHTML = dataArray.map(renderItem).join('');
+                            col.classList.remove('hidden');
+                        } else {
+                            col.classList.add('hidden');
+                        }
+                    };
+
+                    handleColumn(data.aktualne, 'list-aktualne', 'col-aktualne');
+                    handleColumn(data.odkazy, 'list-odkazy', 'col-odkazy');
+                    handleColumn(data.uzitecne, 'list-uzitecne', 'col-uzitecne');
 
                     loader.classList.add('hidden');
                     content.classList.remove('hidden');
