@@ -376,7 +376,6 @@ exit;
                 </form>
             </div>
         </div>
-
         <!-- Seznam -->
         <div class="lg:col-span-2 bg-white p-6 rounded shadow">
             <h2 class="text-lg font-bold mb-4">Obsah webu</h2>
@@ -391,7 +390,7 @@ exit;
                                 <th class="p-3">Kategorie</th>
                                 <th class="p-3">Obsah</th>
                                 <th class="p-3">Cíl odkazu</th>
-                                <th class="p-3 text-right">Akce</th>
+                                <th class="p-3 text-right sticky right-0 bg-gray-100 border-l border-gray-200 shadow-sm z-10">Akce</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
@@ -400,7 +399,7 @@ exit;
                             foreach($items as $item):
                                 $isUpload = strpos($item['link'], $uploadDir) === 0;
                             ?>
-                            <tr class="hover:bg-gray-50 transition">
+                            <tr class="group hover:bg-gray-50 transition">
                                 <td class="p-3 w-20">
                                     <input type="number" name="items[<?= $item['id'] ?>][sort_order]" value="<?= $item['sort_order'] ?>" class="w-16 border p-1 rounded text-center">
                                 </td>
@@ -441,7 +440,7 @@ exit;
                                     <?php endif; ?>
                                     <a href="<?= htmlspecialchars($item['link']) ?>" target="_blank" class="hover:underline"><?= htmlspecialchars($item['link']) ?></a>
                                 </td>
-                                <td class="p-3 text-right">
+                                <td class="p-3 text-right sticky right-0 bg-white group-hover:bg-gray-50 border-l border-gray-200 shadow-sm z-10">
                                     <a href="?delete=<?= $item['id'] ?>" class="text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 p-2 rounded transition" onclick="return confirm('Opravdu smazat tuto položku? Pokud jde o nahraný soubor, bude smazán i z disku.')">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
