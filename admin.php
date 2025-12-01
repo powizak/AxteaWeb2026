@@ -333,6 +333,7 @@ exit;
                         <span onclick="setIcon('file-pdf')" class="cursor-pointer hover:underline bg-blue-50 px-2 py-1 rounded border border-blue-100">PDF</span>
                         <span onclick="setIcon('file-word')" class="cursor-pointer hover:underline bg-blue-50 px-2 py-1 rounded border border-blue-100">Word</span>
                         <span onclick="setIcon('file-excel')" class="cursor-pointer hover:underline bg-blue-50 px-2 py-1 rounded border border-blue-100">Excel</span>
+                        <span onclick="setIcon('file-powerpoint')" class="cursor-pointer hover:underline bg-blue-50 px-2 py-1 rounded border border-blue-100">PowerPoint</span>
                         <span onclick="setIcon('file-alt')" class="cursor-pointer hover:underline bg-blue-50 px-2 py-1 rounded border border-blue-100">Dokument</span>
                         
                         <!-- Finance / Daně -->
@@ -351,6 +352,14 @@ exit;
                         <span onclick="setIcon('landmark')" class="cursor-pointer hover:underline bg-purple-50 px-2 py-1 rounded border border-purple-100 text-purple-700">Banka/Úřad</span>
                         <span onclick="setIcon('envelope')" class="cursor-pointer hover:underline bg-purple-50 px-2 py-1 rounded border border-purple-100 text-purple-700">Dopis/Datovka</span>
                         <span onclick="setIcon('calendar-alt')" class="cursor-pointer hover:underline bg-purple-50 px-2 py-1 rounded border border-purple-100 text-purple-700">Kalendář</span>
+
+                        <!-- Emoji / Ostatní -->
+                        <span onclick="setIcon('smile')" class="cursor-pointer hover:underline bg-yellow-50 px-2 py-1 rounded border border-yellow-100 text-yellow-700">Úsměv</span>
+                        <span onclick="setIcon('thumbs-up')" class="cursor-pointer hover:underline bg-yellow-50 px-2 py-1 rounded border border-yellow-100 text-yellow-700">Palec nahoru</span>
+                        <span onclick="setIcon('star')" class="cursor-pointer hover:underline bg-yellow-50 px-2 py-1 rounded border border-yellow-100 text-yellow-700">Hvězda</span>
+                        <span onclick="setIcon('heart')" class="cursor-pointer hover:underline bg-red-50 px-2 py-1 rounded border border-red-100 text-red-700">Srdce</span>
+                        <span onclick="setIcon('exclamation-triangle')" class="cursor-pointer hover:underline bg-red-50 px-2 py-1 rounded border border-red-100 text-red-700">Pozor</span>
+                        <span onclick="setIcon('question-circle')" class="cursor-pointer hover:underline bg-blue-50 px-2 py-1 rounded border border-blue-100 text-blue-700">Otazník</span>
                     </div>
                 </div>
                 
