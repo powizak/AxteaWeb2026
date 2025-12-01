@@ -750,6 +750,8 @@
                     this.vx = (Math.random() - 0.5) * 0.5; // Rychlost X
                     this.vy = (Math.random() - 0.5) * 0.5; // Rychlost Y
                     this.size = Math.random() * 2 + 1;
+                    // Náhodná číslice 0-9
+                    this.char = String(Math.floor(Math.random() * 10));
                 }
 
                 update() {
@@ -762,10 +764,11 @@
                 }
 
                 draw() {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
-                    ctx.fill();
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+                    ctx.font = '12px Inter, sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(this.char, this.x, this.y);
                 }
             }
 
