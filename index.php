@@ -103,8 +103,8 @@
             <div class="flex justify-between items-center h-20">
                 <div class="flex-shrink-0 flex items-center">
                     <!-- LOGO s jemným pozadím pro čitelnost -->
-                    <a href="#" class="px-2 py-1 rounded transition hover:bg-white">
-                        <img src="/img/logo.svg" alt="AXTEA" class="h-10 md:h-12 w-auto">
+                    <a href="#" class="px-2 py-1 rounded transition hover:opacity-80">
+                        <img src="/img/logo.svg" alt="AXTEA" id="nav-logo" class="h-10 md:h-12 w-auto transition filter duration-300 brightness-0 invert">
                     </a>
                 </div>
                 <div class="hidden md:block">
@@ -555,11 +555,12 @@
 
     <!-- Scripts -->
     <script>
-        // Navbar scroll effect & Color Switch
-        window.addEventListener('scroll', function() {
+        // Navbar scroll effect & Color Switch (Updated)
+        function updateNavbar() {
             const nav = document.getElementById('navbar');
             const links = document.querySelectorAll('.nav-link');
             const mobileBtn = document.getElementById('mobile-menu-btn');
+            const logo = document.getElementById('nav-logo');
 
             if (window.scrollY > 50) {
                 // Scrolled state (White bg, Dark text)
@@ -570,6 +571,7 @@
                 });
                 mobileBtn.classList.remove('text-white', 'hover:text-blue-200');
                 mobileBtn.classList.add('text-gray-700', 'hover:text-primary');
+                if(logo) logo.classList.remove('brightness-0', 'invert');
 
             } else {
                 // Top state (Transparent bg, White text)
@@ -580,8 +582,11 @@
                 });
                 mobileBtn.classList.remove('text-gray-700', 'hover:text-primary');
                 mobileBtn.classList.add('text-white', 'hover:text-blue-200');
+                if(logo) logo.classList.add('brightness-0', 'invert');
             }
-        });
+        }
+        window.addEventListener('scroll', updateNavbar);
+        document.addEventListener('DOMContentLoaded', updateNavbar);
 
         // Načítání praktických informací z API
         document.addEventListener('DOMContentLoaded', function() {
