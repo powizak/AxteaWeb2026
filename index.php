@@ -110,11 +110,11 @@
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
                         <!-- Odkazy mají defaultně 'text-white' pro zobrazení na tmavém pozadí -->
-                        <a href="#sluzby" class="nav-link text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300">Služby</a>
-                        <a href="#o-nas" class="nav-link text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300">O nás</a>
-                        <a href="#prakticke" class="nav-link text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300">Praktické info</a>
-                        <a href="#kurzy" class="nav-link text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300">Kurzy</a>
-                        <a href="#kontakt" class="bg-primary text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-blue-800 transition shadow-lg transform hover:scale-105 border border-transparent">Kontaktovat</a>
+                        <a href="#sluzby" class="nav-link text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 hover:shadow-[0_0_10px_rgba(255,255,255,0.3)]">Služby</a>
+                        <a href="#o-nas" class="nav-link text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 hover:shadow-[0_0_10px_rgba(255,255,255,0.3)]">O nás</a>
+                        <a href="#prakticke" class="nav-link text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 hover:shadow-[0_0_10px_rgba(255,255,255,0.3)]">Praktické info</a>
+                        <a href="#kurzy" class="nav-link text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 hover:shadow-[0_0_10px_rgba(255,255,255,0.3)]">Kurzy</a>
+                        <a href="#kontakt" class="bg-primary text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-blue-800 transition shadow-lg transform hover:scale-105 border border-transparent hover:shadow-[0_0_15px_rgba(26,93,165,0.6)]">Kontaktovat</a>
                     </div>
                 </div>
                 <!-- Mobile menu button -->
@@ -149,18 +149,20 @@
                 Počítáme s vámi
             </h1>
             <div class="flex flex-col sm:flex-row justify-center gap-4 fade-in-up delay-200">
-                <a href="#sluzby" class="bg-white text-primary px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition shadow-lg">
+                <a href="#sluzby" class="bg-white text-primary px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition shadow-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.5)]">
                     Naše služby
                 </a>
-                <a href="#kontakt" class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-primary transition backdrop-blur-sm">
+                <a href="#kontakt" class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-primary transition backdrop-blur-sm hover:shadow-[0_0_20px_rgba(255,255,255,0.5)]">
                     Sjednat schůzku
                 </a>
             </div>
         </div>
         
         <!-- Scroll Down Indicator -->
-        <div class="absolute bottom-10 animate-bounce text-white text-2xl">
-            <i class="fas fa-chevron-down"></i>
+        <div class="absolute bottom-10 animate-bounce text-white text-2xl z-10">
+            <a href="#sluzby" class="flex items-center justify-center w-14 h-14 rounded-full border-2 border-white/20 text-white hover:bg-white hover:text-primary transition-all duration-300 backdrop-blur-sm hover:shadow-[0_0_20px_rgba(255,255,255,0.4)]">
+                <i class="fas fa-chevron-down text-xl"></i>
+            </a>
         </div>
     </section>
 
@@ -169,7 +171,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl font-serif font-bold text-primary mb-4">Co pro vás zajistíme</h2>
-                <div class="w-20 h-1 bg-primary mx-auto rounded"></div>
+                <div class="w-20 h-1 bg-primary mx-auto rounded mb-8"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed">
+                    Poskytujeme servis pro právnické a fyzické osoby, které chtějí svoji ekonomicko-administrativní agendu nebo její část zabezpečit spoluprací s externí specializovanou firmou.
+                </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -214,17 +219,23 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col lg:flex-row items-center gap-12">
                 <div class="lg:w-1/2">
-                    <h2 class="text-3xl font-serif font-bold text-primary mb-6">Tradice a Odbornost</h2>
-                    <p class="text-gray-600 mb-4 leading-relaxed">
-                        AXTEA s.r.o. je rodinná firma navazující na činnost kanceláře založené již v roce 1992. Zakládáme si na etickém kodexu, mlčenlivosti a osobním přístupu.
-                    </p>
+                    <h2 class="text-3xl font-serif font-bold text-primary mb-6">Tradice, odbornost a etické zásady</h2>
+                    <div class="flex flex-col sm:flex-row gap-6 items-start mb-4">
+                        <p class="text-gray-600 leading-relaxed flex-1">
+
+                        AXTEA s.r.o. je rodinná firma, která navazuje na činnost kanceláře založené v roce 1992 ekonomem Radimem Pavelkem (člen Komory daňových poradců od roku 1994). Jeho erudice a mnohaleté zkušenosti v daňovém poradenství přinášejí naší společnosti odborné zakotvení. Náš pracovní tým je dlouhodobě stabilní, s oporou v rodinné tradici. Vedle poradenství se věnujeme lektorské a vzdělávací činnosti.
+                        </p>
+                        <div class="flex-shrink-0 mx-auto sm:mx-0">
+                            <img src="/img/logo-kdp-cr-orig.webp" alt="Logo Komory daňových poradců ČR" class="w-32 h-auto">
+                        </div>
+                    </div>
                     <p class="text-gray-600 mb-6 leading-relaxed">
-                        Jsme zapsáni v seznamu Komory daňových poradců ČR. Náš tým je stabilní a pravidelně se vzdělává.
+                        Jako společnost jsme zapsáni v seznamu <a href="/files/osvedceni-axtea.pdf" target="_blank" rel="noopener noreferrer">Komory daňových poradců ČR</a> a garantujeme dodržování <a href="/files/etický-kodex.pdf" target="_blank" rel="noopener noreferrer">etického kodexu Komory</a>. Zásada mlčenlivosti a sjednané pojištění výkonu daňového poradenství jsou pro nás samozřejmostí.
                     </p>
                     
                     <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-primary">
-                        <p class="font-bold text-gray-800 mb-1">Sazba služeb</p>
-                        <p class="text-gray-600 text-sm">Běžná sazba: <span class="font-semibold text-primary">2 000 Kč / hod + DPH</span>. Lze sjednat paušál.</p>
+                        <p class="font-bold text-gray-800 mb-1">Kolik to bude stát</p>
+                        <p class="text-gray-600 text-sm">Běžná sazba služeb daňového poradenství činí <span class="font-semibold text-primary">2 000 Kč / hod + DPH</span>. Lze dohodnout také sazbu úkolovou. V rámci dlouhodobé spolupráce lze dohodnout paušální odměnu.</p>
                     </div>
                 </div>
                 <div class="lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4">
