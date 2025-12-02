@@ -113,6 +113,7 @@
                         <a href="#sluzby" class="nav-link text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300">Služby</a>
                         <a href="#o-nas" class="nav-link text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300">O nás</a>
                         <a href="#prakticke" class="nav-link text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300">Praktické info</a>
+                        <a href="#kurzy" class="nav-link text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300">Kurzy</a>
                         <a href="#kontakt" class="bg-primary text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-blue-800 transition shadow-lg transform hover:scale-105 border border-transparent">Kontaktovat</a>
                     </div>
                 </div>
@@ -131,6 +132,7 @@
                 <a href="#sluzby" class="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium">Služby</a>
                 <a href="#o-nas" class="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium">O nás</a>
                 <a href="#prakticke" class="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium">Praktické info</a>
+                <a href="#kurzy" class="text-primary font-bold block px-3 py-2 rounded-md text-base">Kurzy</a>
                 <a href="#kontakt" class="text-primary font-bold block px-3 py-2 rounded-md text-base">Kontakt</a>
             </div>
         </div>
@@ -366,8 +368,8 @@
     <section class="py-16 bg-gray-50" id="kurzy">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-serif font-bold text-primary mb-4">Materiály pro účastníky kurzů</h2>
-                <p class="text-gray-600 mb-8">Tato sekce je přístupná pouze s heslem, které jste obdrželi na kurzu.</p>
+                <h2 class="text-3xl font-serif font-bold text-primary mb-4">Sekce pro účastníky seminářů</h2>
+                <p class="text-gray-600 mb-8">Tato sekce je přístupná pouze s heslem, které jste obdrželi na semináři.</p>
                 
                 <!-- Login Form -->
                 <div id="course-login" class="max-w-md mx-auto">
