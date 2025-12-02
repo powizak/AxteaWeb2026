@@ -229,25 +229,70 @@
                 </div>
                 <div class="lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <!-- Team Grid -->
-                    <div class="bg-white p-4 rounded shadow text-center">
-                        <div class="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-3 flex items-center justify-center text-gray-400"><i class="fas fa-user"></i></div>
-                        <h4 class="font-bold text-sm">Ing. Radim Pavelek</h4>
-                        <p class="text-xs text-gray-500">Daňový poradce</p>
+                    
+                    <!-- Ing. Radim Pavelek -->
+                    <div class="bg-white p-4 rounded shadow text-center hover:shadow-lg transition duration-300">
+                        <div class="w-32 h-32 mx-auto mb-3">
+                            <img src="img/QR_RaPa.svg" alt="QR Kód kontakt Ing. Radim Pavelek" class="w-full h-full object-contain">
+                        </div>
+                        <h4 class="font-bold text-sm text-gray-800">Ing. Radim Pavelek</h4>
+                        <p class="text-xs text-primary font-semibold mb-2">daňový poradce ev. č. 846</p>
+                        <div class="text-xs space-y-1">
+                            <a href="tel:+420775215110" class="block text-gray-500 hover:text-primary transition"><i class="fas fa-phone mr-1"></i> +420 775 215 110</a>
+                            <a href="mailto:pavelek@axtea.cz" class="block text-gray-500 hover:text-primary transition"><i class="fas fa-envelope mr-1"></i> pavelek@axtea.cz</a>
+                        </div>
                     </div>
-                    <div class="bg-white p-4 rounded shadow text-center">
-                        <div class="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-3 flex items-center justify-center text-gray-400"><i class="fas fa-user"></i></div>
-                        <h4 class="font-bold text-sm">Ing. Renata Pavelek</h4>
-                        <p class="text-xs text-gray-500">Správa kanceláře</p>
+
+                    <!-- Ing. Renata Pavelek -->
+                    <div class="bg-white p-4 rounded shadow text-center hover:shadow-lg transition duration-300">
+                        <div class="w-32 h-32 mx-auto mb-3">
+                            <img src="img/QR_RePa.svg" alt="QR Kód kontakt Ing. Renata Pavelek" class="w-full h-full object-contain">
+                        </div>
+                        <h4 class="font-bold text-sm text-gray-800">Ing. Renata Pavelek</h4>
+                        <p class="text-xs text-primary font-semibold mb-2">správa kanceláře</p>
+                        <div class="text-xs space-y-1">
+                            <a href="tel:+420775227891" class="block text-gray-500 hover:text-primary transition"><i class="fas fa-phone mr-1"></i> +420 775 227 891</a>
+                            <a href="mailto:renatapavelek@axtea.cz" class="block text-gray-500 hover:text-primary transition"><i class="fas fa-envelope mr-1"></i> renatapavelek@axtea.cz</a>
+                        </div>
                     </div>
-                    <div class="bg-white p-4 rounded shadow text-center">
-                        <div class="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-3 flex items-center justify-center text-gray-400"><i class="fas fa-user"></i></div>
-                        <h4 class="font-bold text-sm">Ing. Petra Bejvlová</h4>
-                        <p class="text-xs text-gray-500">Daňová poradkyně</p>
+
+                    <!-- Ing. Alžběta Rejtmajerová -->
+                    <div class="bg-white p-4 rounded shadow text-center hover:shadow-lg transition duration-300">
+                        <div class="w-32 h-32 mx-auto mb-3">
+                            <img src="img/QR_AlRe.svg" alt="QR Kód kontakt Ing. Alžběta Rejtmajerová" class="w-full h-full object-contain">
+                        </div>
+                        <h4 class="font-bold text-sm text-gray-800">Ing. Alžběta Rejtmajerová</h4>
+                        <p class="text-xs text-primary font-semibold mb-2">mzdová a personální agenda, účetnictví</p>
+                        <div class="text-xs space-y-1">
+                            <a href="tel:+420732223938" class="block text-gray-500 hover:text-primary transition"><i class="fas fa-phone mr-1"></i> +420 732 223 938</a>
+                            <a href="mailto:rejtmajerova@axtea.cz" class="block text-gray-500 hover:text-primary transition"><i class="fas fa-envelope mr-1"></i> rejtmajerova@axtea.cz</a>
+                        </div>
                     </div>
-                    <div class="bg-white p-4 rounded shadow text-center">
-                        <div class="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-3 flex items-center justify-center text-gray-400"><i class="fas fa-user"></i></div>
-                        <h4 class="font-bold text-sm">Petra Pachová</h4>
-                        <p class="text-xs text-gray-500">Účetnictví</p>
+
+                    <!-- Petra Pachová -->
+                    <div class="bg-white p-4 rounded shadow text-center hover:shadow-lg transition duration-300">
+                        <div class="w-32 h-32 mx-auto mb-3">
+                            <img src="img/QR_PePa.svg" alt="QR Kód kontakt Petra Pachová" class="w-full h-full object-contain">
+                        </div>
+                        <h4 class="font-bold text-sm text-gray-800">Petra Pachová</h4>
+                        <p class="text-xs text-primary font-semibold mb-2">účetnictví, daňová evidence</p>
+                        <div class="text-xs space-y-1">
+                            <a href="tel:+420777652521" class="block text-gray-500 hover:text-primary transition"><i class="fas fa-phone mr-1"></i> +420 777 652 521</a>
+                            <a href="mailto:pachova@axtea.cz" class="block text-gray-500 hover:text-primary transition"><i class="fas fa-envelope mr-1"></i> pachova@axtea.cz</a>
+                        </div>
+                    </div>
+
+                    <!-- Ing. Štěpánka Schreiberová -->
+                    <div class="bg-white p-4 rounded shadow text-center hover:shadow-lg transition duration-300">
+                        <div class="w-32 h-32 mx-auto mb-3">
+                            <img src="img/QR_StSch.svg" alt="QR Kód kontakt Ing. Štěpánka Schreiberová" class="w-full h-full object-contain">
+                        </div>
+                        <h4 class="font-bold text-sm text-gray-800">Ing. Štěpánka Schreiberová</h4>
+                        <p class="text-xs text-primary font-semibold mb-2">účetnictví, daňová evidence</p>
+                        <div class="text-xs space-y-1">
+                            <a href="tel:+420773508226" class="block text-gray-500 hover:text-primary transition"><i class="fas fa-phone mr-1"></i> +420 773 508 226</a>
+                            <a href="mailto:schreiberova@axtea.cz" class="block text-gray-500 hover:text-primary transition"><i class="fas fa-envelope mr-1"></i> schreiberova@axtea.cz</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -269,7 +314,7 @@
                         <h3 class="text-2xl font-serif font-bold">AXTEA s.r.o.</h3>
                         <!-- QR CODE -->
                         <div class="bg-white p-2 rounded-lg shadow-sm flex-shrink-0">
-                            <img src="/img/contact-qr-code.svg" alt="QR Kód Kontakt" class="w-20 h-20">
+                            <img src="/img/contact-qr-code.svg" alt="QR Kód Kontakt AXTEA s.r.o." class="w-20 h-20">
                         </div>
                     </div>
                     
@@ -302,7 +347,7 @@
                             <i class="fas fa-clock mt-1 w-6 text-blue-300"></i>
                             <div>
                                 <p class="font-semibold">Pracovní doba</p>
-                                <p class="text-blue-100 text-sm">8:00 – 12:00; 13:00 – 16:00</p>
+                                <p class="text-blue-100 text-sm">Po-Pá 8:00 – 12:00; 13:00 – 16:00</p>
                             </div>
                         </div>
                     </div>
