@@ -127,12 +127,12 @@
             </div>
         </div>
         <!-- Mobile Menu -->
-        <div class="hidden md:hidden bg-white shadow-lg absolute w-full" id="mobile-menu">
+        <div class="hidden md:hidden bg-white/90 backdrop-blur-md shadow-lg absolute w-full" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="#sluzby" class="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium">Služby</a>
                 <a href="#o-nas" class="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium">O nás</a>
                 <a href="#prakticke" class="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium">Praktické info</a>
-                <a href="#kurzy" class="text-primary font-bold block px-3 py-2 rounded-md text-base">Kurzy</a>
+                <a href="#kurzy" class="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium">Kurzy</a>
                 <a href="#kontakt" class="text-primary font-bold block px-3 py-2 rounded-md text-base">Kontakt</a>
             </div>
         </div>
@@ -587,6 +587,18 @@
         }
         window.addEventListener('scroll', updateNavbar);
         document.addEventListener('DOMContentLoaded', updateNavbar);
+
+        // Mobile menu auto-close
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        });
 
         // Načítání praktických informací z API
         document.addEventListener('DOMContentLoaded', function() {
