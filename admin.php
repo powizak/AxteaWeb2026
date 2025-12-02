@@ -34,6 +34,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_password']) &&
     }
 }
 
+// --- ZMĚNA HESLA ADMINISTRÁTORA ---
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_admin_password']) && isset($_SESSION['user_id'])) {
+    $newAdminPass = trim($_POST['admin_password']);
+    if (!empty($newAdminPass)) {
+        $newHash = password_hash($newAdminPass, PASSWORD_DEFAULT);
+        $stmt = $pdo->prepare("UPDATE users SET password_hash = ? WHERE id = ?");
+        $stmt->execute([$newHash, $_SESSION['user_id']]);
+        $success = "Heslo administrátora bylo úspěšně změněno.";
+    }
+}
+
 // --- LOGIN ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
     $username = $_POST['username'];
@@ -381,6 +392,18 @@ exit;
                         ?>
                         <input type="text" name="course_password" value="<?= htmlspecialchars($currentPass) ?>" class="w-full border p-2 rounded text-sm">
                         <button type="submit" name="update_password" class="bg-blue-600 text-white px-3 rounded hover:bg-blue-700 text-sm">Uložit</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Nastavení hesla administrátora -->
+            <div class="mt-8 pt-8 border-t">
+                <h3 class="text-md font-bold mb-3 text-gray-700">Změna hesla administrace</h3>
+                <form method="post" class="bg-gray-50 p-4 rounded border">
+                    <label class="block text-sm text-gray-600 mb-1">Nové heslo</label>
+                    <div class="flex gap-2">
+                        <input type="password" name="admin_password" class="w-full border p-2 rounded text-sm" placeholder="Nové heslo" required>
+                        <button type="submit" name="update_admin_password" class="bg-red-600 text-white px-3 rounded hover:bg-red-700 text-sm">Změnit</button>
                     </div>
                 </form>
             </div>
