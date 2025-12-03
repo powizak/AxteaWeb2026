@@ -113,7 +113,7 @@
                         <a href="#sluzby" class="nav-link text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 hover:shadow-[0_0_10px_rgba(255,255,255,0.3)]">Služby</a>
                         <a href="#o-nas" class="nav-link text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 hover:shadow-[0_0_10px_rgba(255,255,255,0.3)]">O nás</a>
                         <a href="#prakticke" class="nav-link text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 hover:shadow-[0_0_10px_rgba(255,255,255,0.3)]">Praktické info</a>
-                        <a href="#kurzy" class="nav-link text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 hover:shadow-[0_0_10px_rgba(255,255,255,0.3)]">Kurzy</a>
+                        <a href="#kurzy" class="nav-link text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 hover:shadow-[0_0_10px_rgba(255,255,255,0.3)]">Semináře</a>
                         <a href="#kontakt" class="bg-primary text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-blue-800 transition shadow-lg transform hover:scale-105 border border-transparent hover:shadow-[0_0_15px_rgba(26,93,165,0.6)]">Kontaktovat</a>
                     </div>
                 </div>
@@ -132,7 +132,7 @@
                 <a href="#sluzby" class="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium">Služby</a>
                 <a href="#o-nas" class="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium">O nás</a>
                 <a href="#prakticke" class="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium">Praktické info</a>
-                <a href="#kurzy" class="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium">Kurzy</a>
+                <a href="#kurzy" class="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium">Semináře</a>
                 <a href="#kontakt" class="text-primary font-bold block px-3 py-2 rounded-md text-base">Kontakt</a>
             </div>
         </div>
@@ -184,8 +184,8 @@
                         <i class="fas fa-calculator text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3 text-gray-800">Daňové poradenství</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        Komplexní zpracování daňových přiznání (příjmy, DPH, nemovitosti). Zastupování před úřady a optimalizace.
+                    <p class="text-gray-600 text-sm leading-relaxed mb-3">
+                        §  Vypracování daňových přiznání k jednotlivým daním (z příjmů, z nemovitých věcí a jejich nabytí, DPH včetně souvisejících hlášení, silniční, spotřební).
                     </p>
                 </div>
 
@@ -194,9 +194,12 @@
                     <div class="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center mb-6 text-primary group-hover:bg-primary group-hover:text-white transition">
                         <i class="fas fa-file-invoice text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-gray-800">Vedení účetnictví</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        Kompletní účetní agenda, daňová evidence a mzdová agenda pro malé i velké firmy.
+                    <h3 class="text-xl font-bold mb-3 text-gray-800">Ekonomicko-organizační poradenství</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-3">
+                        §  Poradenství při developerských projektech
+                    </p>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-3">
+                        §  Přeměny společností
                     </p>
                 </div>
 
@@ -205,10 +208,16 @@
                     <div class="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center mb-6 text-primary group-hover:bg-primary group-hover:text-white transition">
                         <i class="fas fa-chart-line text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-gray-800">Ekonomické poradenství</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        Poradenství při developerských projektech, přeměny společností a finanční analýzy.
+                    <h3 class="text-xl font-bold mb-3 text-gray-800">Vedení agend</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-3">
+                        §  účetnictví, mzdové agendy, daňové evidence
                     </p>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-3">
+                        §  Zpracování přidružených výkazů (bankovní, statistické)
+                    </p>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-3">
+                        §  Kalkulace
+                    </p>    
                 </div>
             </div>
         </div>
@@ -230,7 +239,7 @@
                         </div>
                     </div>
                     <p class="text-gray-600 mb-6 leading-relaxed">
-                        Jako společnost jsme zapsáni v seznamu <a href="/files/osvedceni-axtea.pdf" target="_blank" rel="noopener noreferrer">Komory daňových poradců ČR</a> a garantujeme dodržování <a href="/files/etický-kodex.pdf" target="_blank" rel="noopener noreferrer">etického kodexu Komory</a>. Zásada mlčenlivosti a sjednané pojištění výkonu daňového poradenství jsou pro nás samozřejmostí.
+                        Jako společnost jsme zapsáni v seznamu <a href="/files/osvedceni-axtea.pdf" target="_blank" rel="noopener noreferrer">Komory daňových poradců ČR</a> a garantujeme dodržování <a href="/files/eticky-kodex.pdf" target="_blank" rel="noopener noreferrer">etického kodexu Komory</a>. Zásada mlčenlivosti a sjednané pojištění výkonu daňového poradenství jsou pro nás samozřejmostí.
                     </p>
                     
                     <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-primary">
@@ -322,7 +331,13 @@
                 <!-- Kontaktní info -->
                 <div class="lg:w-1/3 bg-primary text-white p-10 rounded-2xl shadow-xl">
                     <div class="flex justify-between items-start mb-8">
-                        <h3 class="text-2xl font-serif font-bold">AXTEA s.r.o.</h3>
+                        <div>
+                            <h3 class="text-2xl font-serif font-bold mb-2">AXTEA s.r.o.</h3>
+                            <p class="text-sm opacity-90">IČ: 26394456</p>
+                            <p class="text-sm opacity-90">DIČ: CZ26394456</p>
+                            <p class="text-sm opacity-90">Obchodní rejstřík: KS v Plzni, C 17557</p>
+                            <p class="text-sm opacity-90">Datová schránka: 9gxqehu</p>
+                        </div>
                         <!-- QR CODE -->
                         <div class="bg-white p-2 rounded-lg shadow-sm flex-shrink-0">
                             <img src="/img/contact-qr-code.svg" alt="QR Kód Kontakt AXTEA s.r.o." class="w-20 h-20">
@@ -357,7 +372,7 @@
                         <div class="flex items-start">
                             <i class="fas fa-clock mt-1 w-6 text-blue-300"></i>
                             <div>
-                                <p class="font-semibold">Pracovní doba</p>
+                                <p class="font-semibold">Základní pracovní doba</p>
                                 <p class="text-blue-100 text-sm">Po-Pá 8:00 – 12:00; 13:00 – 16:00</p>
                             </div>
                         </div>
