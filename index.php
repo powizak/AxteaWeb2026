@@ -226,8 +226,8 @@
     <!-- O nás / Tým -->
     <section id="o-nas" class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col lg:flex-row items-center gap-12">
-                <div class="lg:w-1/2">
+            <div class="max-w-4xl mx-auto">
+                <div>
                     <h2 class="text-3xl font-serif font-bold text-primary mb-6">Tradice, odbornost a etické zásady</h2>
                     <div class="flex flex-col sm:flex-row gap-6 items-start mb-4">
                         <p class="text-gray-600 leading-relaxed flex-1">
@@ -247,7 +247,7 @@
                         <p class="text-gray-600 text-sm">Běžná sazba služeb daňového poradenství činí <span class="font-semibold text-primary">2 000 Kč / hod + DPH</span>. Lze dohodnout také sazbu úkolovou. V rámci dlouhodobé spolupráce lze dohodnout paušální odměnu.</p>
                     </div>
                 </div>
-                <div class="lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="hidden">
                     <!-- Team Grid -->
                     
                     <!-- Ing. Radim Pavelek -->
@@ -382,6 +382,77 @@
                 <!-- Mapa -->
                 <div class="lg:w-2/3 h-80 lg:h-auto rounded-2xl overflow-hidden shadow-lg border border-gray-200">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2578.6886259958574!2d13.4020502!3d49.7354855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470af1d7d38d06ab%3A0xec6ae4b2f6353251!2sNohova%201398%2F19%2C%20326%2000%20Plze%C5%88%202-Slovany!5e0!3m2!1scs!2scz!4v1700000000000!5m2!1scs!2scz" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+
+            <!-- Team Grid -->
+            <div class="mt-16">
+                <h3 class="text-2xl font-serif font-bold text-primary mb-8 text-center">Náš tým</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+                    <!-- Ing. Radim Pavelek -->
+                    <div class="bg-white p-4 rounded shadow text-center hover:shadow-lg transition duration-300 border border-gray-100">
+                        <div class="w-32 h-32 mx-auto mb-3">
+                            <img src="img/QR_RaPa.svg" alt="QR Kód kontakt Ing. Radim Pavelek" class="w-full h-full object-contain">
+                        </div>
+                        <h4 class="font-bold text-sm text-gray-800">Ing. Radim Pavelek</h4>
+                        <p class="text-xs text-primary font-semibold mb-2">daňový poradce ev. č. 846</p>
+                        <div class="text-xs space-y-1">
+                            <a href="tel:+420775215110" class="block text-gray-500 hover:text-primary transition"><i class="fas fa-phone mr-1"></i> +420 775 215 110</a>
+                            <a href="mailto:pavelek@axtea.cz" class="block text-gray-500 hover:text-primary transition"><i class="fas fa-envelope mr-1"></i> pavelek@axtea.cz</a>
+                        </div>
+                    </div>
+
+                    <!-- Ing. Renata Pavelek -->
+                    <div class="bg-white p-4 rounded shadow text-center hover:shadow-lg transition duration-300 border border-gray-100">
+                        <div class="w-32 h-32 mx-auto mb-3">
+                            <img src="img/QR_RePa.svg" alt="QR Kód kontakt Ing. Renata Pavelek" class="w-full h-full object-contain">
+                        </div>
+                        <h4 class="font-bold text-sm text-gray-800">Ing. Renata Pavelek</h4>
+                        <p class="text-xs text-primary font-semibold mb-2">správa kanceláře</p>
+                        <div class="text-xs space-y-1">
+                            <a href="tel:+420775227891" class="block text-gray-500 hover:text-primary transition"><i class="fas fa-phone mr-1"></i> +420 775 227 891</a>
+                            <a href="mailto:renatapavelek@axtea.cz" class="block text-gray-500 hover:text-primary transition"><i class="fas fa-envelope mr-1"></i> renatapavelek@axtea.cz</a>
+                        </div>
+                    </div>
+
+                    <!-- Ing. Alžběta Rejtmajerová -->
+                    <div class="bg-white p-4 rounded shadow text-center hover:shadow-lg transition duration-300 border border-gray-100">
+                        <div class="w-32 h-32 mx-auto mb-3">
+                            <img src="img/QR_AlRe.svg" alt="QR Kód kontakt Ing. Alžběta Rejtmajerová" class="w-full h-full object-contain">
+                        </div>
+                        <h4 class="font-bold text-sm text-gray-800">Ing. Alžběta Rejtmajerová</h4>
+                        <p class="text-xs text-primary font-semibold mb-2">mzdová a personální agenda, účetnictví</p>
+                        <div class="text-xs space-y-1">
+                            <a href="tel:+420732223938" class="block text-gray-500 hover:text-primary transition"><i class="fas fa-phone mr-1"></i> +420 732 223 938</a>
+                            <a href="mailto:rejtmajerova@axtea.cz" class="block text-gray-500 hover:text-primary transition"><i class="fas fa-envelope mr-1"></i> rejtmajerova@axtea.cz</a>
+                        </div>
+                    </div>
+
+                    <!-- Petra Pachová -->
+                    <div class="bg-white p-4 rounded shadow text-center hover:shadow-lg transition duration-300 border border-gray-100">
+                        <div class="w-32 h-32 mx-auto mb-3">
+                            <img src="img/QR_PePa.svg" alt="QR Kód kontakt Petra Pachová" class="w-full h-full object-contain">
+                        </div>
+                        <h4 class="font-bold text-sm text-gray-800">Petra Pachová</h4>
+                        <p class="text-xs text-primary font-semibold mb-2">účetnictví, daňová evidence</p>
+                        <div class="text-xs space-y-1">
+                            <a href="tel:+420777652521" class="block text-gray-500 hover:text-primary transition"><i class="fas fa-phone mr-1"></i> +420 777 652 521</a>
+                            <a href="mailto:pachova@axtea.cz" class="block text-gray-500 hover:text-primary transition"><i class="fas fa-envelope mr-1"></i> pachova@axtea.cz</a>
+                        </div>
+                    </div>
+
+                    <!-- Ing. Štěpánka Schreiberová -->
+                    <div class="bg-white p-4 rounded shadow text-center hover:shadow-lg transition duration-300 border border-gray-100">
+                        <div class="w-32 h-32 mx-auto mb-3">
+                            <img src="img/QR_StSch.svg" alt="QR Kód kontakt Ing. Štěpánka Schreiberová" class="w-full h-full object-contain">
+                        </div>
+                        <h4 class="font-bold text-sm text-gray-800">Ing. Štěpánka Schreiberová</h4>
+                        <p class="text-xs text-primary font-semibold mb-2">účetnictví, daňová evidence</p>
+                        <div class="text-xs space-y-1">
+                            <a href="tel:+420773508226" class="block text-gray-500 hover:text-primary transition"><i class="fas fa-phone mr-1"></i> +420 773 508 226</a>
+                            <a href="mailto:schreiberova@axtea.cz" class="block text-gray-500 hover:text-primary transition"><i class="fas fa-envelope mr-1"></i> schreiberova@axtea.cz</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
