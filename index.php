@@ -223,6 +223,44 @@
         </div>
     </section>
 
+    <!-- Jak probíhá spolupráce -->
+    <section class="py-20 bg-primary text-white relative overflow-hidden">
+        <!-- Decorative background element -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
+            <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-white blur-3xl"></div>
+            <div class="absolute bottom-0 right-0 w-64 h-64 rounded-full bg-blue-400 blur-3xl"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h2 class="text-3xl font-serif font-bold text-white mb-8">Jak probíhá spolupráce</h2>
+            <div class="w-20 h-1 bg-blue-300 mx-auto rounded mb-10"></div>
+            
+            <p class="text-blue-50 text-lg leading-relaxed mb-8">
+                Konkrétní podobu výkonů vždy upravujeme na míru podle vašich požadavků. Obvykle spolupracujeme s klienty pravidelně, ať jde o týdenní, měsíční nebo roční režim, podle povahy věci. Jednorázové poskytnutí našich služeb oceníte v situaci, kdy vaše aktivity a projekty stojí na křižovatce a pro rozhodnutí o dalším vývoji potřebujete kvalitní, fundované a vysoce individualizované rady ve věcech, kterým rozumíme.
+            </p>
+            
+            <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 inline-block hover:bg-white/15 transition duration-300">
+                <p class="text-white text-xl font-semibold leading-relaxed">
+                    <i class="fas fa-check-circle text-blue-300 mr-2"></i>
+                    Situace, které to svojí povahou vyžadují, zastřešíme udělením plné moci.
+                </p>
+            </div>
+
+            <div class="mt-12 max-w-2xl mx-auto bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 shadow-2xl text-left relative overflow-hidden group hover:bg-white/15 transition duration-300">
+                <div class="absolute top-0 left-0 w-1 h-full bg-blue-300 shadow-[0_0_15px_rgba(147,197,253,0.5)]"></div>
+                <p class="font-serif font-bold text-xl mb-4 text-white flex items-center">
+                    <i class="fas fa-coins text-blue-300 mr-3 text-2xl"></i>
+                    Kolik to bude stát
+                </p>
+
+                <p class="text-blue-50 leading-relaxed text-lg">
+                    Běžná sazba služeb daňového poradenství činí <span class="font-bold text-white bg-white/10 px-2 py-1 rounded">2 000 Kč / hod + DPH</span>. 
+                    Lze dohodnout také sazbu úkolovou. V rámci dlouhodobé spolupráce lze dohodnout paušální odměnu.
+                </p>
+            </div>
+        </div>
+    </section>
+
     <!-- O nás / Tým -->
     <section id="o-nas" class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -235,17 +273,14 @@
                         AXTEA s.r.o. je rodinná firma, která navazuje na činnost kanceláře založené v roce 1992 ekonomem Radimem Pavelkem (člen Komory daňových poradců od roku 1994). Jeho erudice a mnohaleté zkušenosti v daňovém poradenství přinášejí naší společnosti odborné zakotvení. Náš pracovní tým je dlouhodobě stabilní, s oporou v rodinné tradici. Vedle poradenství se věnujeme lektorské a vzdělávací činnosti.
                         </p>
                         <div class="flex-shrink-0 mx-auto sm:mx-0">
-                            <img src="/img/logo-kdp-cr-orig.webp" alt="Logo Komory daňových poradců ČR" class="w-32 h-auto">
+                            <a href="https://www.kdpcr.cz/" target="_blank" rel="noopener noreferrer" class="block transform hover:scale-105 transition duration-300">
+                                <img src="/img/logo-kdp-cr-orig.webp" alt="Logo Komory daňových poradců ČR" class="w-32 h-auto drop-shadow-md hover:drop-shadow-xl">
+                            </a>
                         </div>
                     </div>
                     <p class="text-gray-600 mb-6 leading-relaxed">
-                        Jako společnost jsme zapsáni v seznamu <a href="/files/osvedceni-axtea.pdf" target="_blank" rel="noopener noreferrer">Komory daňových poradců ČR</a> a garantujeme dodržování <a href="/files/eticky-kodex.pdf" target="_blank" rel="noopener noreferrer">etického kodexu Komory</a>. Zásada mlčenlivosti a sjednané pojištění výkonu daňového poradenství jsou pro nás samozřejmostí.
-                    </p>
-                    
-                    <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-primary">
-                        <p class="font-bold text-gray-800 mb-1">Kolik to bude stát</p>
-                        <p class="text-gray-600 text-sm">Běžná sazba služeb daňového poradenství činí <span class="font-semibold text-primary">2 000 Kč / hod + DPH</span>. Lze dohodnout také sazbu úkolovou. V rámci dlouhodobé spolupráce lze dohodnout paušální odměnu.</p>
-                    </div>
+                        Jako společnost jsme zapsáni v seznamu <a href="/files/osvedceni-axtea.pdf" target="_blank" rel="noopener noreferrer" class="text-primary font-medium hover:underline">Komory daňových poradců ČR</a> a garantujeme dodržování <a href="/files/eticky-kodex.pdf" target="_blank" rel="noopener noreferrer" class="text-primary font-medium hover:underline">etického kodexu Komory</a>. Zásada mlčenlivosti a sjednané pojištění výkonu daňového poradenství jsou pro nás samozřejmostí.
+                   </p>
                 </div>
                 <div class="hidden">
                     <!-- Team Grid -->
@@ -568,7 +603,7 @@
     <!-- Footer -->
     <footer class="bg-black text-gray-500 py-8 text-center text-sm">
         <p>&copy; 2025 AXTEA s.r.o. | Vytvořeno s důrazem na rychlost a design.</p>
-        <p class="mt-2"><a href="admin.php" class="text-gray-700 hover:text-gray-400">Admin přihlášení</a></p>
+        <p class="mt-2"><a href="vos.php" class="text-gray-700 hover:text-gray-400">vstup VOS (zákon č. 253 / 2008 Sb.)</a></p>
     </footer>
 
     <!-- 2. COOKIE BANNER HTML -->
