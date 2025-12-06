@@ -187,7 +187,11 @@
                     <ul class="space-y-2">
                         <li class="flex items-start">
                             <i class="fas fa-check-circle text-primary mt-1 mr-2 flex-shrink-0"></i>
-                            <span class="text-sm text-gray-600 leading-relaxed">Vypracování daňových přiznání k jednotlivým daním (z příjmů, z nemovitých věcí a jejich nabytí, DPH včetně souvisejících hlášení, silniční, spotřební).</span>
+                            <span class="text-sm text-gray-600 leading-relaxed">Odborné posouzení situace z pohledu daňových dopadů, předložení možných variant.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-sm text-gray-600 leading-relaxed">Sestavení příslušných daňových tvrzení (přiznání, hlášení, vyúčtování).</span>
                         </li>
                     </ul>
                 </div>
@@ -205,7 +209,7 @@
                         </li>
                         <li class="flex items-start">
                              <i class="fas fa-check-circle text-primary mt-1 mr-2 flex-shrink-0"></i>
-                            <span class="text-sm text-gray-600 leading-relaxed">Přeměny společností</span>
+                            <span class="text-sm text-gray-600 leading-relaxed">Přeměny a likvidace společností</span>
                         </li>
                     </ul>
                 </div>
@@ -219,7 +223,7 @@
                     <ul class="space-y-2">
                         <li class="flex items-start">
                              <i class="fas fa-check-circle text-primary mt-1 mr-2 flex-shrink-0"></i>
-                            <span class="text-sm text-gray-600 leading-relaxed">účetnictví, mzdové agendy, daňové evidence</span>
+                            <span class="text-sm text-gray-600 leading-relaxed">Účetnictví, mzdová agenda, daňová evidence</span>
                         </li>
                         <li class="flex items-start">
                              <i class="fas fa-check-circle text-primary mt-1 mr-2 flex-shrink-0"></i>
