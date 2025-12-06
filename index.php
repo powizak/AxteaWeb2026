@@ -184,9 +184,12 @@
                         <i class="fas fa-calculator text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3 text-gray-800">Daňové poradenství</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed mb-3">
-                        §  Vypracování daňových přiznání k jednotlivým daním (z příjmů, z nemovitých věcí a jejich nabytí, DPH včetně souvisejících hlášení, silniční, spotřební).
-                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-sm text-gray-600 leading-relaxed">Vypracování daňových přiznání k jednotlivým daním (z příjmů, z nemovitých věcí a jejich nabytí, DPH včetně souvisejících hlášení, silniční, spotřební).</span>
+                        </li>
+                    </ul>
                 </div>
 
                 <!-- Karta 2 -->
@@ -195,12 +198,16 @@
                         <i class="fas fa-file-invoice text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3 text-gray-800">Ekonomicko-organizační poradenství</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed mb-3">
-                        §  Poradenství při developerských projektech
-                    </p>
-                    <p class="text-gray-600 text-sm leading-relaxed mb-3">
-                        §  Přeměny společností
-                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                             <i class="fas fa-check-circle text-primary mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-sm text-gray-600 leading-relaxed">Poradenství při developerských projektech</span>
+                        </li>
+                        <li class="flex items-start">
+                             <i class="fas fa-check-circle text-primary mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-sm text-gray-600 leading-relaxed">Přeměny společností</span>
+                        </li>
+                    </ul>
                 </div>
 
                 <!-- Karta 3 -->
@@ -209,15 +216,20 @@
                         <i class="fas fa-chart-line text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3 text-gray-800">Vedení agend</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed mb-3">
-                        §  účetnictví, mzdové agendy, daňové evidence
-                    </p>
-                    <p class="text-gray-600 text-sm leading-relaxed mb-3">
-                        §  Zpracování přidružených výkazů (bankovní, statistické)
-                    </p>
-                    <p class="text-gray-600 text-sm leading-relaxed mb-3">
-                        §  Kalkulace
-                    </p>    
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                             <i class="fas fa-check-circle text-primary mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-sm text-gray-600 leading-relaxed">účetnictví, mzdové agendy, daňové evidence</span>
+                        </li>
+                        <li class="flex items-start">
+                             <i class="fas fa-check-circle text-primary mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-sm text-gray-600 leading-relaxed">Zpracování přidružených výkazů (bankovní, statistické)</span>
+                        </li>
+                        <li class="flex items-start">
+                             <i class="fas fa-check-circle text-primary mt-1 mr-2 flex-shrink-0"></i>
+                            <span class="text-sm text-gray-600 leading-relaxed">Kalkulace</span>
+                        </li>
+                    </ul>    
                 </div>
             </div>
         </div>
