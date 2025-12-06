@@ -266,7 +266,7 @@
                 </p>
 
                 <p class="text-blue-50 leading-relaxed text-lg">
-                    Běžná sazba služeb daňového poradenství činí <span class="font-bold text-white bg-white/10 px-2 py-1 rounded">2 000 Kč / hod + DPH</span>. 
+                    Běžná sazba služeb daňového poradenství činí <span class="font-bold text-white bg-white/10 px-2 py-1 rounded">2 200 Kč / hod + DPH</span>. 
                     Lze dohodnout také sazbu úkolovou. V rámci dlouhodobé spolupráce lze dohodnout paušální odměnu.
                 </p>
             </div>
