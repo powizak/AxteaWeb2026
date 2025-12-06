@@ -295,7 +295,7 @@
                         </div>
                     </div>
                     <p class="text-gray-600 mb-6 leading-relaxed">
-                        Jako společnost jsme zapsáni v seznamu <a href="/files/osvedceni-axtea.pdf" target="_blank" rel="noopener noreferrer" class="text-primary font-medium hover:underline">Komory daňových poradců ČR</a> a garantujeme dodržování <a href="/files/eticky-kodex.pdf" target="_blank" rel="noopener noreferrer" class="text-primary font-medium hover:underline">etického kodexu Komory</a>. Zásada mlčenlivosti a sjednané pojištění výkonu daňového poradenství jsou pro nás samozřejmostí.
+                        Jako společnost jsme zapsáni v seznamu <a href="https://www.kdpcr.cz/spolecnost/axtea-sro" target="_blank" rel="noopener noreferrer" class="text-primary font-medium hover:underline">Komory daňových poradců ČR</a> a garantujeme dodržování etického kodexu Komory. Zásada mlčenlivosti a sjednané pojištění výkonu daňového poradenství jsou pro nás samozřejmostí.
                    </p>
                 </div>
                 <div class="hidden">
