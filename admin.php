@@ -37,11 +37,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_password']) &&
 // --- ZMĚNA HESLA ADMINISTRÁTORA ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_admin_password']) && isset($_SESSION['user_id'])) {
     $newAdminPass = trim($_POST['admin_password']);
+    $newAdminPassConfirm = trim($_POST['admin_password_confirm']);
+
     if (!empty($newAdminPass)) {
-        $newHash = password_hash($newAdminPass, PASSWORD_DEFAULT);
-        $stmt = $pdo->prepare("UPDATE users SET password_hash = ? WHERE id = ?");
-        $stmt->execute([$newHash, $_SESSION['user_id']]);
-        $success = "Heslo administrátora bylo úspěšně změněno.";
+        if ($newAdminPass === $newAdminPassConfirm) {
+            $newHash = password_hash($newAdminPass, PASSWORD_DEFAULT);
+            $stmt = $pdo->prepare("UPDATE users SET password_hash = ? WHERE id = ?");
+            $stmt->execute([$newHash, $_SESSION['user_id']]);
+            $success = "Heslo administrátora bylo úspěšně změněno.";
+        } else {
+            $error = "Zadaná hesla se neshodují. Zkuste to prosím znovu.";
+        }
+    } else {
+        $error = "Heslo nesmí být prázdné.";
     }
 }
 
@@ -401,9 +409,10 @@ exit;
                 <h3 class="text-md font-bold mb-3 text-gray-700">Změna hesla administrace</h3>
                 <form method="post" class="bg-gray-50 p-4 rounded border">
                     <label class="block text-sm text-gray-600 mb-1">Nové heslo</label>
-                    <div class="flex gap-2">
+                    <div class="flex flex-col gap-2">
                         <input type="password" name="admin_password" class="w-full border p-2 rounded text-sm" placeholder="Nové heslo" required>
-                        <button type="submit" name="update_admin_password" class="bg-red-600 text-white px-3 rounded hover:bg-red-700 text-sm">Změnit</button>
+                        <input type="password" name="admin_password_confirm" class="w-full border p-2 rounded text-sm" placeholder="Potvrzení hesla" required>
+                        <button type="submit" name="update_admin_password" class="bg-red-600 text-white px-3 py-2 rounded hover:bg-red-700 text-sm font-bold">Změnit heslo</button>
                     </div>
                 </form>
             </div>
