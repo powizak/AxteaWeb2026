@@ -1,7 +1,7 @@
 info.md
-.env
+.env*
 .gemini
-
+robots.txt
 password_tool.php
 *.pdf
 *.db

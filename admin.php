@@ -197,6 +197,7 @@ if (!isset($_SESSION['user_id'])) {
 <head>
     <meta charset="UTF-8">
     <title>Admin Login</title>
+    <meta name="robots" content="noindex, nofollow">
     <link rel="stylesheet" href="dist/styles.css">
 
        <!-- Favicony -->
@@ -228,6 +229,7 @@ exit;
 <head>
     <meta charset="UTF-8">
     <title>Správa obsahu | AXTEA</title>
+    <meta name="robots" content="noindex, nofollow">
     <link rel="stylesheet" href="dist/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
