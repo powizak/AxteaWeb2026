@@ -8,30 +8,11 @@
     <!-- Favicony -->
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSS (Local Build) -->
+    <link rel="stylesheet" href="dist/styles.css">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#004b9c',
-                        secondary: '#1a5da5',
-                        dark: '#1d1d1c',
-                        light: '#f3f4f6'
-                    },
-                    fontFamily: {
-                        sans: ['Helvetica', 'sans-serif'],
-                        serif: ['Helvetica', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
 </head>
 <body class="bg-gray-50 flex items-center justify-center min-h-screen">
 
