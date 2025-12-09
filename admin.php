@@ -20,11 +20,24 @@ if (isset($_GET['logout'])) {
     header("Location: admin.php");
     exit;
 }
+
+// CSRF Protection Helper
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+function verify_csrf() {
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        die("CSRF validation failed.");
+    }
+}
+
 $error = '';
 $success = '';
 
 // --- ZMĚNA HESLA PRO KURZY ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_password']) && isset($_SESSION['user_id'])) {
+    verify_csrf();
     $newPass = trim($_POST['course_password']);
     if (!empty($newPass)) {
         // Uložíme/Aktualizujeme heslo v DB
@@ -36,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_password']) &&
 
 // --- ZMĚNA HESLA ADMINISTRÁTORA ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_admin_password']) && isset($_SESSION['user_id'])) {
+    verify_csrf();
     $newAdminPass = trim($_POST['admin_password']);
     $newAdminPassConfirm = trim($_POST['admin_password_confirm']);
 
@@ -55,8 +69,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_admin_password
 
 // --- LOGIN ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    // Note: Usually CSRF is less critical on login forms, but good practice.
+    // For simplicity, we are skipping it here or we need to inject it into the login form below before login logic.
+    // Let's protect it.
+    if (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
+        $stmt->execute([$username]);
+        $user = $stmt->fetch();
+
+        if ($user && password_verify($password, $user['password_hash'])) {
+            $_SESSION['user_id'] = $user['id'];
+            // Regenerate session ID after login
+            session_regenerate_id(true);
+            header("Location: admin.php");
+            exit;
+        } else {
+            $error = "Špatné jméno nebo heslo.";
+        }
+    } else {
+         $error = "Chyba zabezpečení (CSRF). Zkuste to znovu.";
+    }
+}
     
     $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
     $stmt->execute([$username]);
@@ -73,14 +109,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
 
 // --- PŘIDÁNÍ POLOŽKY + NAHRÁVÁNÍ SOUBORU ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_item']) && isset($_SESSION['user_id'])) {
+    verify_csrf();
     
     $link = $_POST['link']; // Výchozí hodnota z textového pole
     $uploadSuccess = true;
 
     // Zpracování nahrávání souboru
     if (isset($_FILES['file_upload']) && $_FILES['file_upload']['error'] === UPLOAD_ERR_OK) {
+        // Povolené přípony
+        $allowedExtensions = ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'txt', 'jpg', 'jpeg', 'png', 'gif'];
+        $fileInfo = pathinfo($_FILES['file_upload']['name']);
+        $extension = strtolower($fileInfo['extension']);
+
+        if (!in_array($extension, $allowedExtensions)) {
+            $error = "Typ souboru není povolen. Povolené formáty: " . implode(', ', $allowedExtensions);
+            $uploadSuccess = false;
+        }
+
         // Kontrola existence složky
-        if (!is_dir($uploadDir)) {
+        if ($uploadSuccess && !is_dir($uploadDir)) {
             if (!mkdir($uploadDir, 0755, true)) {
                 $error = "Nepodařilo se vytvořit složku pro nahrávání ($uploadDir).";
                 $uploadSuccess = false;
@@ -91,15 +138,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_item']) && isset(
             $fileName = basename($_FILES['file_upload']['name']);
             // Jednoduchá sanitizace jména souboru (odstranění diakritiky a mezer)
             $fileName = preg_replace("/[^a-zA-Z0-9.]/", "_", $fileName);
-            // Přidání časového razítka proti přepsání
-            $targetPath = $uploadDir . time() . '_' . $fileName;
 
-            // Pokus o přesun souboru
-            if (move_uploaded_file($_FILES['file_upload']['tmp_name'], $targetPath)) {
-                $link = $targetPath; // Odkaz nyní směřuje na nahraný soubor
+            // Dvojitá kontrola přípony po sanitizaci (pro jistotu)
+            $finalExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+            if (!in_array($finalExt, $allowedExtensions)) {
+                 $error = "Neplatný název souboru nebo přípona.";
+                 $uploadSuccess = false;
             } else {
-                $error = "Chyba při ukládání souboru. Zkontrolujte práva složky $uploadDir.";
-                $uploadSuccess = false;
+                // Přidání časového razítka proti přepsání
+                $targetPath = $uploadDir . time() . '_' . $fileName;
+
+                // Pokus o přesun souboru
+                if (move_uploaded_file($_FILES['file_upload']['tmp_name'], $targetPath)) {
+                    $link = $targetPath; // Odkaz nyní směřuje na nahraný soubor
+                } else {
+                    $error = "Chyba při ukládání souboru. Zkontrolujte práva složky $uploadDir.";
+                    $uploadSuccess = false;
+                }
             }
         }
     }
@@ -143,6 +198,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_item']) && isset(
 
 // --- HROMADNÁ ÚPRAVA (POŘADÍ A AKTIVITA) ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_items']) && isset($_SESSION['user_id'])) {
+    verify_csrf();
     if (isset($_POST['items']) && is_array($_POST['items'])) {
         $sql = "UPDATE practical_info SET sort_order = ?, is_active = ? WHERE id = ?";
         $stmt = $pdo->prepare($sql);
@@ -211,6 +267,7 @@ if (!isset($_SESSION['user_id'])) {
         <h1 class="text-2xl font-bold mb-6 text-center">AXTEA Admin</h1>
         <?php if($error): ?><p class="text-red-500 mb-4 text-sm text-center"><?= $error ?></p><?php endif; ?>
         <form method="post">
+            <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
             <input type="text" name="username" placeholder="Jméno" class="w-full border p-2 mb-4 rounded" required>
             <input type="password" name="password" placeholder="Heslo" class="w-full border p-2 mb-6 rounded" required>
             <button type="submit" name="login" class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">Přihlásit</button>
@@ -256,6 +313,7 @@ exit;
 
             <!-- Důležité: enctype pro nahrávání souborů -->
             <form method="post" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                 
                 <!-- Výběr Sekce -->
                 <div class="mb-4 bg-gray-50 p-3 rounded border">
@@ -369,6 +427,7 @@ exit;
             <div class="mt-8 pt-8 border-t">
                 <h3 class="text-md font-bold mb-3 text-gray-700">Nastavení kurzů</h3>
                 <form method="post" class="bg-gray-50 p-4 rounded border">
+                    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                     <label class="block text-sm text-gray-600 mb-1">Heslo pro účastníky</label>
                     <div class="flex gap-2">
                         <?php
@@ -386,6 +445,7 @@ exit;
             <div class="mt-8 pt-8 border-t">
                 <h3 class="text-md font-bold mb-3 text-gray-700">Změna hesla administrace</h3>
                 <form method="post" class="bg-gray-50 p-4 rounded border">
+                    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                     <label class="block text-sm text-gray-600 mb-1">Nové heslo</label>
                     <div class="flex flex-col gap-2">
                         <input type="password" name="admin_password" class="w-full border p-2 rounded text-sm" placeholder="Nové heslo" required>
@@ -399,6 +459,7 @@ exit;
         <div class="lg:col-span-2 bg-white p-6 rounded shadow">
             <h2 class="text-lg font-bold mb-4">Obsah webu</h2>
             <form method="post">
+                <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                 <div class="overflow-x-auto">
                     <table class="min-w-full text-sm text-left">
                         <thead class="bg-gray-100 text-gray-600 uppercase text-xs">

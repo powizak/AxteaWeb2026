@@ -6,3 +6,4 @@ password_tool.php
 *.pdf
 *.db
 ftp.md
+node_modules/
