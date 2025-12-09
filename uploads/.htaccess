@@ -1,5 +1,21 @@
 # Disable PHP execution in this directory
 <FilesMatch "\.(php|phtml|php3|php4|php5|pl|py|jsp|asp|html|htm|shtml|sh|cgi)$">
-    Order Allow,Deny
-    Deny from all
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order Allow,Deny
+        Deny from all
+    </IfModule>
 </FilesMatch>
+
+# explicitly allow other files if necessary, depending on server config inheritance
+<IfModule mod_authz_core.c>
+    # Apache 2.4
+    Require all granted
+</IfModule>
+<IfModule !mod_authz_core.c>
+    # Apache 2.2
+    Order Allow,Deny
+    Allow from all
+</IfModule>

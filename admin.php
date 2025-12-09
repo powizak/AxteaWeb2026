@@ -93,20 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
          $error = "Chyba zabezpečení (CSRF). Zkuste to znovu.";
     }
 }
-    
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
-    $stmt->execute([$username]);
-    $user = $stmt->fetch();
-
-    if ($user && password_verify($password, $user['password_hash'])) {
-        $_SESSION['user_id'] = $user['id'];
-        header("Location: admin.php");
-        exit;
-    } else {
-        $error = "Špatné jméno nebo heslo.";
-    }
-}
-
+ 
 // --- PŘIDÁNÍ POLOŽKY + NAHRÁVÁNÍ SOUBORU ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_item']) && isset($_SESSION['user_id'])) {
     verify_csrf();
