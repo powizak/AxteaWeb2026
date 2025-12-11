@@ -603,6 +603,12 @@
         <p class="mt-2"><a href="vos.php" class="text-gray-700 hover:text-gray-400">vstup VOS (zákon č. 253 / 2008 Sb.)</a></p>
     </footer>
 
+    <!-- 4. COOKIE TRIGGER ICON -->
+    <!-- 4. COOKIE TRIGGER ICON -->
+    <button id="cookie-settings-trigger" onclick="CookieConsent.showSettings()" class="fixed bottom-4 right-4 z-40 bg-white text-gray-700 p-3 rounded-full shadow-lg border border-gray-200 hover:bg-gray-50 transition-all duration-300 hidden hover:scale-110 flex items-center justify-center" title="Nastavení cookies">
+        <i class="fas fa-cookie-bite text-2xl text-primary"></i>
+    </button>
+
     <!-- 2. COOKIE BANNER HTML -->
     <div id="cookie-banner" class="fixed bottom-0 w-full bg-white border-t border-gray-200 shadow-2xl z-50 hidden p-6">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
@@ -775,21 +781,40 @@
         const CookieConsent = {
             banner: document.getElementById('cookie-banner'),
             settings: document.getElementById('cookie-settings'),
+            trigger: document.getElementById('cookie-settings-trigger'),
             
             init: function() {
                 // Kontrola, zda již bylo rozhodnuto
                 const savedConsent = localStorage.getItem('cookie_consent');
-                if (!savedConsent) {
+                
+                let consent = null;
+                if (savedConsent) {
+                    try {
+                        consent = JSON.parse(savedConsent);
+                    } catch (e) {
+                        console.error("Cookie consent parse error", e);
+                        localStorage.removeItem('cookie_consent');
+                    }
+                }
+
+                if (!consent) {
                     this.banner.classList.remove('hidden');
+                    this.trigger.classList.add('hidden');
                 } else {
                     // Pokud bylo uloženo, aplikujeme nastavení
-                    const consent = JSON.parse(savedConsent);
                     this.updateGCM(consent);
                     this.loadScripts(consent);
+                    this.trigger.classList.remove('hidden');
                 }
             },
 
             showSettings: function() {
+                const savedConsent = localStorage.getItem('cookie_consent');
+                if (savedConsent) {
+                    const consent = JSON.parse(savedConsent);
+                    document.getElementById('toggle-analytics').checked = consent.analytics;
+                    document.getElementById('toggle-marketing').checked = consent.marketing;
+                }
                 this.settings.classList.remove('hidden');
             },
 
@@ -820,6 +845,7 @@
                 this.loadScripts(consent);
                 this.banner.classList.add('hidden');
                 this.settings.classList.add('hidden');
+                this.trigger.classList.remove('hidden');
             },
 
             // Aktualizace Google Consent Mode
