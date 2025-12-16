@@ -14,36 +14,26 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-gray-50 flex items-center justify-center min-h-screen">
+<body class="bg-gray-50 h-screen flex flex-col overflow-hidden">
 
-    <div class="max-w-2xl w-full mx-auto px-4 text-center">
-        <div class="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100 p-8 md:p-12">
-            
-            <div class="mb-8">
-                <img src="img/vos_construction.png" alt="Stránka ve výstavbě" class="w-full h-auto rounded-xl shadow-md">
-            </div>
+    <header class="bg-white shadow-md border-b border-gray-100 py-3 px-4 md:px-8 flex justify-between items-center z-20 shrink-0 h-16">
+        <h1 class="text-xl md:text-2xl font-serif font-bold text-gray-800 tracking-tight">Vnitřní oznamovací systém</h1>
+        <a href="index.php" class="inline-flex items-center justify-center px-4 py-2 bg-primary text-white text-sm font-bold rounded-lg hover:bg-secondary transition duration-300 shadow hover:shadow-md">
+            <i class="fas fa-arrow-left mr-2"></i> Zpět
+        </a>
+    </header>
 
-            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 font-serif">Stránka ve výstavbě</h1>
-            
-            <div class="w-16 h-1 bg-primary mx-auto rounded mb-6"></div>
-
-            <p class="text-xl text-gray-600 mb-2 font-medium">
-                vstup VOS (zákon č. 253 / 2008 Sb.)
+    <main class="flex-grow w-full relative z-10">
+        <iframe 
+            src="files/VOS-AX.pdf" 
+            class="absolute inset-0 w-full h-full" 
+            title="VOS - AXTEA s.r.o.">
+            <p class="text-center p-8 bg-gray-100">
+                Váš prohlížeč nepodporuje zobrazení PDF. 
+                <a href="files/VOS-AX.pdf" class="text-primary font-bold hover:underline">Stáhněte si soubor zde</a>.
             </p>
-            
-            <p class="text-gray-500 mb-10 leading-relaxed">
-                Na této sekci usilovně pracujeme. Děkujeme za pochopení.
-            </p>
-
-            <a href="index.php" class="inline-flex items-center justify-center px-8 py-3 bg-primary text-white font-bold rounded-lg hover:bg-secondary transition duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                <i class="fas fa-arrow-left mr-2"></i> Zpět na úvodní stranu
-            </a>
-        </div>
-        
-        <div class="mt-8 text-gray-400 text-sm">
-            &copy; 2025 AXTEA s.r.o.
-        </div>
-    </div>
+        </iframe>
+    </main>
 
 </body>
 </html>
